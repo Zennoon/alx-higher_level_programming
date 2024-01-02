@@ -33,3 +33,6 @@ float with 2 digits precision using the .2f specifier.
 5-print_string.py: This script introduces the concepts of string replication 
 using the * operator, and string slicing using indices. It prints a string
 stored in a variable 3 times, and then prints the first 9 characters of it.
+
+6-concat.py: This script introduces string concatenation using the + operator.
+It concatenates two strings stored in variables along with a space between them.
