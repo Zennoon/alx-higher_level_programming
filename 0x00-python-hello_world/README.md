@@ -36,3 +36,8 @@ stored in a variable 3 times, and then prints the first 9 characters of it.
 
 6-concat.py: This script introduces string concatenation using the + operator.
 It concatenates two strings stored in variables along with a space between them.
+
+7-edges.py: This scripts delves further into string slicing, and playing with
+negative indices. Instead of using negative indices, the len function could have
+been used, but the Zen of Python's third principle is 'Simple is better than
+complex'.
