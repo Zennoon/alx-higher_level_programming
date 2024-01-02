@@ -47,3 +47,9 @@ them to form a different sentence.
 
 9-easter_egg.py: This script displays the zen of python by Tim Peters using an
 easter egg activated by 'import this'
+
+10-check_cycle.c: Well... This was awesome. The function checks for the
+existence of a cycle in a linked list. It does so by using two node pointers
+one jumping one node at a time, and the other jumping two at a time. If there
+is a cycle in the list, the two pointers are bound to meet at some point
+meaning their values (address of the node they point to) will be the same.
