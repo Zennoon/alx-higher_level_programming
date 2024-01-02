@@ -44,3 +44,6 @@ complex'.
 
 8-concat_edges.py: Just another script that slices a single strings and concats
 them to form a different sentence.
+
+9-easter_egg.py: This script displays the zen of python by Tim Peters using an
+easter egg activated by 'import this'
