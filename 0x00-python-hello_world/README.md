@@ -41,3 +41,6 @@ It concatenates two strings stored in variables along with a space between them.
 negative indices. Instead of using negative indices, the len function could have
 been used, but the Zen of Python's third principle is 'Simple is better than
 complex'.
+
+8-concat_edges.py: Just another script that slices a single strings and concats
+them to form a different sentence.
