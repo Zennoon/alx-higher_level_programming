@@ -1,2 +1,22 @@
-Thsi directory was created on Jan 2, 2024 to as part of the project
+This directory was created on Jan 2, 2024 to as part of the project
 '0x00. Python - Hello, World' of ALX SE Foundations Sprint #2
+
+This project was an introduction to python, and some of its features.
+It included such concepts as how to run the interpreter in different ways,
+including passing it a python command using the -c command, executing commands
+from a file, and others.
+
+0-run: This is a simple shell script that runs a python file whose name is
+stored inside an environment variable called 'PYFILE'. One thing that confused
+me in this task was why we needed to include the python3 command, because in
+the python file, it had the '#!/usr/bin/python3' directive, but I think it is
+because if we just write ./$PYFILE, the python file might not be executable
+which would result in an error.
+
+1-run_inline: This script starts the interpreter kind of in a non-interactive
+mode by just passing it a command to run using the -c option.
+
+2-print.py: This script prints exactly "programming is like building a
+multilingual puzzle". The concept that alx wanted us to practice here is mainly
+figuring out how to print the quotation marks with print, which is done by
+escaping via \.
