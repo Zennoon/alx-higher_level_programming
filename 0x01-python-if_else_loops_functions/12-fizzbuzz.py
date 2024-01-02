@@ -12,4 +12,3 @@ def fizzbuzz():
             printed = i
         print("{}".format(printed), end=" ")
     print("")
-fizzbuzz()
