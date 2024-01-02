@@ -29,3 +29,7 @@ hence the d specifier.
 
 4-print_float.py: This script prints a formatted string which interpolates a
 float with 2 digits precision using the .2f specifier.
+
+5-print_string.py: This script introduces the concepts of string replication 
+using the * operator, and string slicing using indices. It prints a string
+stored in a variable 3 times, and then prints the first 9 characters of it.
