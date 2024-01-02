@@ -13,10 +13,13 @@ the python file, it had the '#!/usr/bin/python3' directive, but I think it is
 because if we just write ./$PYFILE, the python file might not be executable
 which would result in an error.
 
-1-run_inline: This script starts the interpreter kind of in a non-interactive
-mode by just passing it a command to run using the -c option.
+1-run_inline: This shell script starts the interpreter kind of in a
+non-interactive mode by just passing it a command to run using the -c option.
 
-2-print.py: This script prints exactly "programming is like building a
+2-print.py: This script prints exactly \"programming is like building a
 multilingual puzzle. The concept that alx wanted us to practice here is mainly
 figuring out how to print the quotation marks with print, which is done by
 escaping via \.
+
+3-print_number.py: This python script prints a formatted string which includes
+a number stored in a variable using f-strings and the print function.
