@@ -22,4 +22,10 @@ figuring out how to print the quotation marks with print, which is done by
 escaping via \.
 
 3-print_number.py: This python script prints a formatted string which includes
-a number stored in a variable using f-strings and the print function.
+a number stored in a variable using f-strings and the print function. The
+challenge here is to code defensively. The number variable could be assigned a
+string, a list or some other thing. In such a case, we want to throw an error,
+hence the d specifier.
+
+4-print_float.py: This script prints a formatted string which interpolates a
+float with 2 digits precision using the .2f specifier.
