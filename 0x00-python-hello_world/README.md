@@ -17,6 +17,6 @@ which would result in an error.
 mode by just passing it a command to run using the -c option.
 
 2-print.py: This script prints exactly "programming is like building a
-multilingual puzzle". The concept that alx wanted us to practice here is mainly
+multilingual puzzle. The concept that alx wanted us to practice here is mainly
 figuring out how to print the quotation marks with print, which is done by
 escaping via \.
