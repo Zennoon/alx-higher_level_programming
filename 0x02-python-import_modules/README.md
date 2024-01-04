@@ -49,3 +49,46 @@ Tasks:
 0-add.py: This script just imports a single function called add from a file
 called add_0.py. The challenge here is to make the code not execute when
 imported using the __name__ trick.
+
+1-calculation.py: Imports multiple functions and executes them by passing
+local variables as arguments.
+
+2-args.py: This script gets the command line arguments list with sys.argv
+and prints them if any.
+
+3-infinite_sum: This one is essentially for the most part the same as the above,
+the only difference being instead of printing the arguments, we convert them to
+ints (it is assumed that they can all be casted using int()) and add them and
+then print the sum.
+
+4-hidden_discovery: This script imports a compiled python file (.pyc extension)
+and prints all the names defined by the file using the dir() function.
+
+5-variable_load.py: The new thing here is that we are loading a variable instead
+of a function from a module.
+
+100-my_calculator.py: This was a bit fun. Gave me a chance to try the function
+pointer stuff I learned with C in python, and it turns out that we can actually
+store functions (or at least their names) in lists. The script basically accepts
+an expression from the command line. If the expression is invalid, it prints an
+appropriate message and exits (using sys.exit). Otherwise, we have two lists,
+one of the operator signs, and the other of handler function for each operator.
+The function handling each operator is placed in the same index in that list
+as the operator it handles is placed in the operator signs list. So, once we
+identify the index of the operator we receive from the command line, we execute
+the function at that index in the functions list. This is done using the index()
+method.
+
+101-easy_print.py: This one is quite funny. The challenge was to write the
+string "#pythoniscool" with out using 'print' and 'import sys' in the file
+and the file has to be 2 lines, and I just thought it was bizarre how the
+instructions emphasized the in the file part, and I just wrote the code in
+another file and imported that file to my main file. When modules are imported,
+the expressions inside them are executed once, so by just importing the module,
+I am able to execute the expression.
+
+103-fast_alphabet.py: The challenge here was to print the Uppercase alphabet
+characters without using any loop or string literal, and the file can only be
+3 lines long. After looking around a bit, I found out about the string module,
+and specifically the ascii_uppercase constant, which holds the entire alphabet
+in uppercase.
