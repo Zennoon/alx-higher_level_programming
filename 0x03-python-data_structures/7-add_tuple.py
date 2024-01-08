@@ -1,5 +1,8 @@
 #!/usr/bin/python3
 def add_tuple(tuple_a=(), tuple_b=()):
+    """
+    Return the sum of the first two elements of two given tuples.
+    """
     sum1 = 0
     sum2 = 0
     if len(tuple_a) > 0:
