@@ -18,22 +18,32 @@ int is_palindrome(listint_t **head)
 		node_ptr = node_ptr->next;
 		len++;
 	}
-	n_arr = malloc(sizeof(int) * len);
+	if (len <= 1)
+		return (0);
+	n_arr = malloc(sizeof(int) * (len / 2));
 	node_ptr = *head;
-	while (n_arr && node_ptr)
+	for (i = 0; i < ((len + 1) / 2); i++)
 	{
-		n_arr[i] = node_ptr->n;
 		node_ptr = node_ptr->next;
-		i++;
 	}
-	for (i = 0; i < len / 2; i++)
+	if (n_arr != NULL)
 	{
-		if (n_arr[i] != n_arr[len - 1 - i])
+		for (i = 0; i < (len / 2); i++)
 		{
-			free(n_arr);
-			return (0);
+			n_arr[i] = node_ptr->n;
+			node_ptr = node_ptr->next;
 		}
+		node_ptr = *head;
+		for (i = (len / 2) - 1; i >= 0; i--)
+		{
+			if (node_ptr->n != n_arr[i])
+			{
+				free(n_arr);
+				return (0);
+			}
+			node_ptr = node_ptr->next;
+		}
+		free(n_arr);
 	}
-	free(n_arr);
 	return (1);
 }
