@@ -4,6 +4,9 @@ def no_c(my_string):
     Return a string that includes all the characters of a given string
     except 'c' and 'C'
     """
+    new_string = ""
     if my_string:
-        char_list = [char for char in my_string if char not in "Cc"]
-        return ("".join(char_list))
+        for char in my_string:
+            if char != 'c' and char != 'C':
+                new_string += char
+    return (new_string)
