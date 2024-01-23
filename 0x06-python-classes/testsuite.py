@@ -1,36 +1,15 @@
 #!/usr/bin/python3
-# -*- coding: utf-8 -*-
-"""2-square.py
-
-This module is a continuation of the 1-square module having value validation
-for the size attribute of the Square instances
-
-"""
-
-
-class Square(object):
-    """Represents a Square with a given size."""
-
-    def __init__(self, size=0):
-        """Initializer for newly created Square instances.
-
-        Args:
-            size (int): Size of the square (length of a single side)
-
-        """
-        if size.__class__ != int:
-            raise TypeError("size must be an integer")
-        if size < 0:
-            raise ValueError("size must be >= 0")
-        self.__size = size
+Square = __import__("3-square").Square
 
 sq1 = Square(3)
 print(type(sq1))
 print(sq1.__dict__)
+print(sq1.area())
 
-sq2 = Square()
+sq2 = Square(5)
 print(type(sq2))
 print(sq2.__dict__)
+print(sq2.area())
 
 try:
     print(sq1.size)
