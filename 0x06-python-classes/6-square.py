@@ -56,14 +56,13 @@ class Square(object):
 
     @position.setter
     def position(self, tpl):
-        try:
-            if (tpl.__class__ != tuple or tpl[0].__class__ != int
-                    or tpl[0] < 0 or tpl[1].__class__ != int or tpl[1] < 0):
-                raise TypeError("""position must be a tuple of 2 positive
-                        integers""")
-            self.__position = tpl
-        except IndexError:
+        if (tpl.__class__ != tuple or len(tpl) != 2):
             raise TypeError("position must be a tuple of 2 positive integers")
+        if (tpl[0].__class__ != int or tpl[1].__class__ != int):
+            raise TypeError("position must be a tuple of 2 positive integers")
+        if (tpl[0] < 0 or tpl[1] < 0):
+            raise TypeError("position must be a tuple of 2 positive integers")
+        self.__position = tpl
 
     def area(self):
         """Computes and returns the area of the Square instance.
@@ -84,13 +83,14 @@ class Square(object):
         blank lines in the printing.
 
         """
-        for i in range(self.__position[1]):
-            print()
-        for i in range(self.__size):
-            for j in range(self.__position[0]):
-                print(" ", end="")
-            for k in range(self.__size):
-                print("#", end="")
-            print()
         if self.__size == 0:
             print()
+        else:
+            for i in range(self.__position[1]):
+                print()
+            for i in range(self.__size):
+                for j in range(self.__position[0]):
+                    print(" ", end="")
+                for k in range(self.__size):
+                    print("#", end="")
+                print()
