@@ -1,4 +1,5 @@
 #!/usr/bin/python3
-Square = __import__("6-square").Square
+Square = __import__("101-square").Square
 
-sq = Square(1, [2, 3])
+sq = Square(5, (4, 1))
+print(sq)
