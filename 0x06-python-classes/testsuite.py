@@ -1,5 +1,18 @@
 #!/usr/bin/python3
-Square = __import__("101-square").Square
+Square = __import__("102-square").Square
 
-sq = Square(5, (4, 1))
-print(sq)
+sq1 = Square(5)
+sq2 = Square(6)
+
+if sq1 > sq2:
+    print("Sq 5 > Sq 6")
+if sq1 >= sq2:
+    print("Sq 5 >= Sq 6")
+if sq1 == sq2:
+    print("Sq 5 == Sq 6")
+if sq1 != sq2:
+    print("Sq 5 != Sq 6")
+if sq1 <= sq2:
+    print("Sq 5 <= Sq 6")
+if sq1 < sq2:
+    print("Sq 5 < Sq 6")
