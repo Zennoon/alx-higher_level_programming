@@ -29,7 +29,6 @@ class Square(object):
         self.size = size
         self.position = position
 
-
     def __str__(self):
         """Returns user-friendly string representation of a Square instance."""
         output = ""
