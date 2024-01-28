@@ -1,0 +1,89 @@
+=============================================================================
+doctest testfile for the 5-text_indentation.py module in the parent directory
+=============================================================================
+
+The 5-text_indentation module contains a function, text_indentation that accepts
+one argument, text, and parses the text into sentences which are considered to
+be delimited by ., ?, or :. It prints these sentences separated by a blank line.
+
+For more information about the function, refer to its docstring in
+the module.
+
+Example of Usage
+================
+
+	Importing the function
+	----------------------
+	>>> text_indentation = __import__("5-text_indentation").text_indentation
+
+	Valid Argument
+	--------------
+	>>> text_indentation("") # prints nothing
+	>>> text_indentation("       ") # prints nothing
+	>>> text_indentation("Lorem ipsum")
+	Lorem ipsum
+
+	>>> text_indentation("Lorem ipsum? dolor sit amet.")
+	Lorem ipsum?
+	<BLANKLINE>
+	dolor sit amet.
+	<BLANKLINE>
+
+	>>> text_indentation("Lorem ipsum. dolor sit amet? consectetur, elit:")
+	Lorem ipsum.
+	<BLANKLINE>
+	dolor sit amet?
+	<BLANKLINE>
+	consectetur, elit:
+	<BLANKLINE>
+
+	>>> text_indentation("Lorem ipsum: dolor sit amet. consectetur, elit? ")
+	Lorem ipsum:
+	<BLANKLINE>
+	dolor sit amet.
+	<BLANKLINE>
+	consectetur, elit?
+	<BLANKLINE>
+
+	>>> text_indentation("   Lorem ipsum:")
+	Lorem ipsum:
+	<BLANKLINE>
+
+	>>> text_indentation("Lorem ipsum    ")
+	Lorem ipsum
+
+	>>> text_indentation("   Lorem ipsum   ")
+	Lorem ipsum
+
+	>>> text_indentation("  Lorem ipsum. dolor sit amet")
+	Lorem ipsum.
+	<BLANKLINE>
+	dolor sit amet
+
+	>>> text_indentation(".")
+	.
+	<BLANKLINE>
+
+	>>> text_indentation(".?")
+	.
+	<BLANKLINE>
+	?
+	<BLANKLINE>
+
+
+	Invalid Argument
+	----------------
+	>>> text_indentation(None)
+	Traceback (most recent call last):
+		  ...
+	TypeError: text must be a string
+
+	>>> text_indentation(123)
+	Traceback (most recent call last):
+		  ...
+	TypeError: text must be a string
+
+	>>> text_indentation(["Lorem", "ipsum.", "dolor"])
+	Traceback (most recent call last):
+		  ...
+	TypeError: text must be a string
