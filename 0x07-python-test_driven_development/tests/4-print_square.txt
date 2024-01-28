@@ -1,0 +1,65 @@
+=========================================================================
+doctest testfile for the 4-print_square.py module in the parent directory
+=========================================================================
+
+The 4-print_square module contains a function, print_square, that accepts
+a single argument, size, and if the size is valid, prints a square of that
+size made from the '#' character. It checks the validity of the given size
+(it has to be an integer, and >= 0), and if not valid, raises an appropriate
+exception.
+
+For further information about the function, refer to its docstring in the
+module.
+
+Example of usage
+================
+
+	Importing the function
+	----------------------
+	>>> print_square = __import__("4-print_square").print_square
+
+	Valid Argument
+	--------------
+	>>> print_square(0) # prints nothing
+	>>> print_square(1)
+	#
+
+	>>> print_square(5)
+	#####
+	#####
+	#####
+	#####
+	#####
+
+
+	Invalid Argument
+	----------------
+	>>> print_square(-5)
+	Traceback (most recent call last):
+		  ...
+	ValueError: size must be >= 0
+
+	>>> print_square(None)
+	Traceback (most recent call last):
+		  ...
+	TypeError: size must be an integer
+
+	>>> print_square(3.5)
+	Traceback (most recent call last):
+		  ...
+	TypeError: size must be an integer
+
+	>>> print_square(-3.5)
+	Traceback (most recent call last):
+		  ...
+	TypeError: size must be an integer
+
+	>>> print_square('10')
+	Traceback (most recent call last):
+		  ...
+	TypeError: size must be an integer
+
+	>>> print_square([5])
+	Traceback (most recent call last):
+		  ...
+	TypeError: size must be an integer
