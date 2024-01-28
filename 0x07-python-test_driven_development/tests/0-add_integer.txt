@@ -1,0 +1,69 @@
+============================================================
+doctest testfile for the 0-add_integer.py file in the parent
+directory
+============================================================
+
+The 0-add_integer.py module contains a function, add_integer,
+that is used to add two integers and return their sum. It also
+has input validation to check the given arguments are real
+numbers. Otherwise, it should raise a Type Error indicating the
+first argument it finds that is not a number.
+
+Note: The second argument of the function has a default value of
+98.
+
+Example of Usage
+================
+
+	Importing the function
+	----------------------
+	>>> add_integer = __import__("0-add_integer").add_integer
+
+
+	Valid Arguments
+	---------------
+	>>> add_integer(10, 5)
+	15
+
+	>>> add_integer(10, -5)
+	5
+
+	>>> add_integer(0, 4)
+	4
+
+	>>> add_integer(0)
+	98
+
+	>>> add_integer(3.5, 2.5)
+	5
+
+	>>> add_integer(10.3, -2.9)
+	8
+
+
+	Invalid Arguments
+	-----------------
+	>>> add_integer(True, False)
+	Traceback (most recent call last):
+		  ...
+	TypeError: a must be an integer
+
+	>>> add_integer(12, False)
+	Traceback (most recent call last):
+		  ...
+	TypeError: b must be an integer
+
+	>>> add_integer("98")
+	Traceback (most recent call last):
+		  ...
+	TypeError: a must be an integer
+
+	>>> add_integer(98, [-98])
+	Traceback (most recent call last):
+		  ...
+	TypeError: b must be an integer
+
+	>>> add_integer(10, 1 + 3j)
+	Traceback (most recent call last):
+		  ...
+	TypeError: b must be an integer
