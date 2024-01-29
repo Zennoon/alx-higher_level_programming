@@ -1,12 +1,13 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-"""3-rectangle.py
+"""4-rectangle.py
 
 Author: Yunus Kedir
 
-This module adds on to the Rectangle class of the 2-rectangle module by adding
-the magic method __str__ to provide an informal string representation of the
-rectangle instance using the '#' character.
+This module adds on to the Rectangle class of the 3-rectangle module by adding
+the magic method __repr__ that provides a formal representation of the calling
+instance that can be passed to the eval function to create a new instance with
+equal attributes.
 """
 
 
@@ -25,7 +26,8 @@ class Rectangle(object):
     def __str__(self):
         """returns an informal string representation of the calling instance.
 
-        It returns the rectangle made with '#' characters.
+        Returns:
+            (str): It returns the rectangle made with '#' characters.
         """
         output = ""
         for i in range(self.area()):
@@ -33,6 +35,14 @@ class Rectangle(object):
                 output += '\n'
             output += '#'
         return (output)
+
+    def __repr__(self):
+        """Returns a formal string representation of the calling instance.
+
+        Returns:
+            (str): String that can be passed to eval to create a new instance.
+        """
+        return ("Rectangle({}, {})".format(self.__width, self.__height))
 
     @property
     def width(self):
