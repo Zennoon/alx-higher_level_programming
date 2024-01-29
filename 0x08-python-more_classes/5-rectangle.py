@@ -1,13 +1,14 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-"""4-rectangle.py
+"""5-rectangle.py
 
 Author: Yunus Kedir
 
-This module adds on to the Rectangle class of the 3-rectangle module by adding
-the magic method __repr__ that provides a formal representation of the calling
-instance that can be passed to the eval function to create a new instance with
-equal attributes.
+This module adds on to the Rectangle class of the 4-rectangle module by adding
+the magic method __del__ that imitates a destructor of an instance. It is
+called when all the references to the instance have been deleted (reference
+count is 0) and python's garbage collector is about to reclaim the memory
+held by the instance.
 """
 
 
@@ -22,6 +23,10 @@ class Rectangle(object):
         """
         self.width = width
         self.height = height
+
+    def __del__(self):
+        """Executed when an instance is garbage collected."""
+        print("Bye rectangle...")
 
     def __str__(self):
         """Returns an informal string representation of the calling instance.
