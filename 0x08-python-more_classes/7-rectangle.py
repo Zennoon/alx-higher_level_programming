@@ -1,18 +1,19 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-"""6-rectangle.py
+"""7-rectangle.py
 
 Author: Yunus Kedir
 
-This module adds on to the Rectangle class of the 5-rectangle module by adding
-a new public class attribute that holds the number of instances of the class
-that exist at any moment.
+This module adds on to the Rectangle class of the 6-rectangle module by adding
+a new public class attribute that holds the symbol to be used for the string
+representation (__str__) of instances of the class.
 """
 
 
 class Rectangle(object):
     """A class that represents a rectangle with given width and height."""
     number_of_instances = 0
+    print_symbol = '#'
 
     def __init__(self, width=0, height=0):
         """Initializes a newly created Rectangle instance.
@@ -40,7 +41,7 @@ class Rectangle(object):
         for i in range(self.area()):
             if i and i % self.__width == 0:
                 output += '\n'
-            output += '#'
+            output += str(self.print_symbol)
         return (output)
 
     def __repr__(self):
