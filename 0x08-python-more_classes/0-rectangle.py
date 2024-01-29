@@ -9,5 +9,5 @@ This module creates an empty class object called Rectangle.
 
 
 class Rectangle(object):
-    """An empty class that is developed further in the nexy tasks."""
+    """An empty class that is developed further in the next tasks."""
     pass

@@ -25,7 +25,7 @@ class Rectangle(object):
 
     @property
     def width(self):
-        """Getter and setter property pair for the width private property.
+        """Getter and setter property pair for the private width attribute.
 
         The setter performs width validation.
         1. width must be an integer
@@ -43,7 +43,7 @@ class Rectangle(object):
 
     @property
     def height(self):
-        """Getter and setter property pair for the height private property.
+        """Getter and setter property pair for the private height attribute.
 
         The setter performs height validation.
         1. height must be an integer
