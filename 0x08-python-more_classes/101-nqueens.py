@@ -2,12 +2,25 @@
 # -*- coding: utf-8 -*-
 """101-nqueens.py
 
+Author: Yunus Kedir
+
+This module holds a program that attempts to solve the N-Queens puzzle given
+the N value from the command line.
+
 """
 
 import sys
 
 
 def find_solutions(n):
+    """Returns a list of all the possible solutions of the puzzle for n.
+
+    Args:
+        n (int): The number of queens to be placed in an n*n board.
+
+    Returns:
+        (list<list<list<int>>>): A list of all possible solutions.
+    """
     solutions = []
     factor = 2
     starter = 1
@@ -26,6 +39,8 @@ def find_solutions(n):
 
 
 def main():
+    """Initiates the program, extracts the command line arguments, checks for
+    their validity, and prints the solutions one line at a time."""
     if len(sys.argv) != 2:
         print("Usage: nqueens N")
         sys.exit(1)
@@ -40,5 +55,6 @@ def main():
     solutions = find_solutions(n)
     for solution in solutions:
         print(solution)
+
 
 main()
