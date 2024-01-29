@@ -67,3 +67,16 @@ Example of Usage
 	Traceback (most recent call last):
 		  ...
 	TypeError: b must be an integer
+
+
+	Incorrect Number of Arguments
+	-----------------------------
+	>>> add_integer() # doctest: +ELLIPSIS
+	Traceback (most recent call last):
+		  ...
+	TypeError: ...
+
+	>>> add_integer(12, 23, 34) # doctest: +ELLIPSIS
+	Traceback (most recent call last):
+                  ...
+        TypeError: ...

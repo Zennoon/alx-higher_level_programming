@@ -18,6 +18,7 @@ Example of usage
 	----------------------
 	>>> print_square = __import__("4-print_square").print_square
 
+
 	Valid Argument
 	--------------
 	>>> print_square(0) # prints nothing
@@ -63,3 +64,16 @@ Example of usage
 	Traceback (most recent call last):
 		  ...
 	TypeError: size must be an integer
+
+
+	Incorrect Number of Arguments
+	-----------------------------
+	>>> print_square() # doctest: +ELLIPSIS
+	Traceback (most recent call last):
+                  ...
+        TypeError: ...
+
+	>>> print_square(5, 5) # doctest: +ELLIPSIS
+	Traceback (most recent call last):
+                  ...
+        TypeError: ...

@@ -19,6 +19,7 @@ Example of Usage
 	----------------------
 	>>> say_my_name = __import__("3-say_my_name").say_my_name
 
+
 	Valid Arguments
 	---------------
 	>>> say_my_name("Yunus")
@@ -54,3 +55,16 @@ Example of Usage
 	Traceback (most recent call last):
 		  ...
 	TypeError: first_name must be a string
+
+
+	Incorrect Number of Arguments
+	-----------------------------
+	>>> say_my_name() # doctest: +ELLIPSIS
+	Traceback (most recent call last):
+                  ...
+        TypeError: ...
+
+	>>> say_my_name("Sami", "Abraham", "David") # doctest: +ELLIPSIS
+	Traceback (most recent call last):
+                  ...
+        TypeError: ...

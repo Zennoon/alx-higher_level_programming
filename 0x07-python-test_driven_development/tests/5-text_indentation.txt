@@ -16,6 +16,7 @@ Example of Usage
 	----------------------
 	>>> text_indentation = __import__("5-text_indentation").text_indentation
 
+
 	Valid Argument
 	--------------
 	>>> text_indentation("") # prints nothing
@@ -87,3 +88,16 @@ Example of Usage
 	Traceback (most recent call last):
 		  ...
 	TypeError: text must be a string
+
+
+	Incorrect Number of Arguments
+	-----------------------------
+	>>> text_indentation() # doctest: +ELLIPSIS
+	Traceback (most recent call last):
+		  ...
+	TypeError: ...
+
+	>>> text_indentation("Lorem", "Ipsum") # doctest: +ELLIPSIS
+        Traceback (most recent call last):
+                  ...
+        TypeError: ...
