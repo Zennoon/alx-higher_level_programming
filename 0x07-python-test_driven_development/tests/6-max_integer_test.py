@@ -57,7 +57,7 @@ class Test_max_integer(unittest.TestCase):
     def test_tuple_arg(self):
         """Tests the function with tuple arguments."""
 
-        self.assertEqual(max_integer(tuple()), None) # Empty tuple
+        self.assertEqual(max_integer(tuple()), None)  # Empty tuple
         self.assertEqual(max_integer((1,)), 1)
         self.assertEqual(max_integer((1, 2, 3)), 3)
         self.assertEqual(max_integer(('1', 'a', 'Z')), 'a')
@@ -102,7 +102,7 @@ class Test_max_integer(unittest.TestCase):
         self.assertRaises(TypeError, max_integer, [1, {1: 'a'}, (1,)])
         # comparison is not supported between instances of complex.
         self.assertRaises(TypeError, max_integer, [1 + 1j, 1 + 2j])
-        # Ordinary relational comparison is not supported between dict instances
+        # Ordinary relational comparison not supported between dict instances
         self.assertRaises(TypeError, max_integer, [{'a': 1}, {'b': 2}])
         self.assertRaises(TypeError, max_integer, [[{'a': 1}], [{'b': 2}]])
         self.assertRaises(TypeError, max_integer, [(1, 2), {1, 2}])

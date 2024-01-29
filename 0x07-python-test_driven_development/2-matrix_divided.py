@@ -22,7 +22,7 @@ def matrix_divided(matrix, div):
 
     Args:
         matrix (list<list<int>>): The matrix whose elements are divided.
-        div (int/float): The number which the elements of the matrix are divided
+        div (int/float): The number which elements of the matrix are divided
         by.
 
     Returns:
