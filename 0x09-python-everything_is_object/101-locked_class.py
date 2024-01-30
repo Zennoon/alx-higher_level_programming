@@ -11,6 +11,6 @@ instance creation) except those whose name are in the list.
 
 
 class LockedClass(object):
-    """An empty class with a __slots__ list listing the only possible attributes
+    """Empty class with a __slots__ list listing the only possible attributes
     to create for an instance of the class."""
     __slots__ = ["first_name"]
