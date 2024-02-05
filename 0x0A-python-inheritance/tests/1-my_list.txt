@@ -1,0 +1,89 @@
+====================================================================
+doctest testfile for the 1-my_list.py module in the parent directory
+====================================================================
+
+The 1-my_list module contains a class, MyList that inherits from the
+predefined list class and extends its functionality by adding a method,
+print_sorted, that prints the sorted version of the list.
+
+For more information concerning the class or the function, refer to the
+respective docstring in the module.
+
+Example of Usage
+================
+
+	Importing the class
+	-------------------
+	>>> MyList = __import__("1-my_list").MyList
+
+
+	Valid Usage
+	-----------
+	>>> my_list = MyList()
+	>>> my_list.append(1)
+	>>> my_list.print_sorted()
+	[1]
+
+	>>> my_list.append(-1)
+	>>> my_list.print_sorted()
+	[-1, 1]
+
+	>>> my_list.append(0)
+	>>> my_list.print_sorted()
+	[-1, 0, 1]
+
+	>>> my_list.append(-10)
+	>>> my_list.append(10)
+	>>> my_list.append(98)
+	>>> my_list.append(-89)
+	>>> my_list.print_sorted()
+	[-89, -10, -1, 0, 1, 10, 98]
+
+	>>> my_list.append(12.5)
+	>>> my_list.append(-22.5)
+	>>> my_list.print_sorted()
+	[-89, -22.5, -10, -1, 0, 1, 10, 12.5, 98]
+
+	>>> my_list.clear()
+	>>> my_list.append("Alpha")
+	>>> my_list.print_sorted()
+	['Alpha']
+
+	>>> my_list.append("Bet")
+	>>> my_list.print_sorted()
+	['Alpha', 'Bet']
+
+	>>> my_list.clear()
+	>>> my_list.append([1, 2, 3])
+	>>> my_list.append([3, 2, 1])
+	>>> my_list.print_sorted()
+	[[1, 2, 3], [3, 2, 1]]
+
+
+	Invalid Usage
+	-------------
+	>>> my_list2 = MyList()
+	>>> my_list2.append(1)
+	>>> my_list2.append('1')
+	>>> my_list2.print_sorted() # doctest: +ELLIPSIS
+	Traceback (most recent call last):
+		  ...
+	TypeError: ...
+
+	>>> my_list2.pop()
+	'1'
+
+	>>> my_list2.append([1])
+	>>> my_list2.print_sorted() # doctest: +ELLIPSIS
+	Traceback (most recent call last):
+		  ...
+	TypeError: ...
+
+	>>> my_list2.pop()
+	[1]
+
+	>>> my_list2.append(None)
+	>>> my_list2.print_sorted() # doctest: +ELLIPSIS
+	Traceback (most recent call last):
+		  ...
+	TypeError: ...
