@@ -19,7 +19,4 @@ def lookup(obj):
     Returns:
         list<str>: A list of the attributes of obj (empty list if obj == None).
     """
-    attrs = []
-    if obj is not None:
-        attrs = list(obj.__dict__.keys())
-    return (attrs)
+    return (dir(obj))
