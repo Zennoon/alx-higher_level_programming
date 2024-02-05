@@ -1,0 +1,111 @@
+==========================================================================
+doctest testfile for the 7-base_geometry.py module in the parent directory
+==========================================================================
+
+The 7-base_geometry module contains a class that has two public instance
+methods. One is the integer_validator method which excepts two arguments,
+a name, and a value, and checks if that value if valid (is a positive integer).
+The method doesn't return a value if all goes well (the value is valid).
+
+For more information concerning the class or the methods, refer to the
+respective docstring in the module.
+
+Example of Usage
+================
+
+	Importing the class
+	-------------------
+	>>> Bg = __import__("7-base_geometry").BaseGeometry
+
+
+	Incorrect Instantiation
+	-----------------------
+	>>> bg1 = Bg("The class takes no args...") # doctest: +ELLIPSIS
+	Traceback (most recent call last):
+		  ...
+	TypeError: ...
+
+
+	Valid Values
+	------------
+	>>> bg1 = Bg()
+	>>> bg1.integer_validator("width", 1)
+	>>> bg1.integer_validator("width", 100)
+	>>> bg1.integer_validator("", 1000)
+	>>> bg1.integer_validator(100, 100)
+	>>> bg1.integer_validator(None, 1)
+	>>> bg1.integer_validator([1, 2, 3], 10)
+
+
+	Invalid Values (Incorrect Type)
+	-------------------------------
+	>>> bg1.integer_validator("width", 1.0) # doctest: +ELLIPSIS
+	Traceback (most recent call last):
+		  ...
+	TypeError: ...
+
+	>>> bg1.integer_validator("width", 2.1) # doctest: +ELLIPSIS
+        Traceback (most recent call last):
+                  ...
+        TypeError: ...
+
+	>>> bg1.integer_validator("width", 1 + 1j) # doctest: +ELLIPSIS
+        Traceback (most recent call last):
+                  ...
+        TypeError: ...
+
+	>>> bg1.integer_validator("width", '1') # doctest: +ELLIPSIS
+        Traceback (most recent call last):
+                  ...
+        TypeError: ...
+
+	>>> bg1.integer_validator("width", [1]) # doctest: +ELLIPSIS
+        Traceback (most recent call last):
+                  ...
+        TypeError: ...
+
+	>>> bg1.integer_validator("width", (1,)) # doctest: +ELLIPSIS
+        Traceback (most recent call last):
+                  ...
+        TypeError: ...
+
+	>>> bg1.integer_validator("width", None) # doctest: +ELLIPSIS
+        Traceback (most recent call last):
+                  ...
+        TypeError: ...
+
+	>>> bg1.integer_validator("width", True) # doctest: +ELLIPSIS
+        Traceback (most recent call last):
+                  ...
+        TypeError: ...
+
+
+	Invalid Values (Incorrect Value)
+	--------------------------------
+	>>> bg1.integer_validator("width", 0) # doctest: +ELLIPSIS
+        Traceback (most recent call last):
+                  ...
+        ValueError: ...
+
+	>>> bg1.integer_validator("width", -1) # doctest: +ELLIPSIS
+        Traceback (most recent call last):
+                  ...
+        ValueError: ...
+
+
+	Incorrect Number of Arguments
+	-----------------------------
+	>>> bg1.integer_validator() # doctest: +ELLIPSIS
+	Traceback (most recent call last):
+		  ...
+	TypeError: ...
+
+	>>> bg1.integer_validator("width") # doctest: +ELLIPSIS
+        Traceback (most recent call last):
+                  ...
+        TypeError: ...
+
+	>>> bg1.integer_validator("width", 1, 2) # doctest: +ELLIPSIS
+        Traceback (most recent call last):
+                  ...
+        TypeError: ...
