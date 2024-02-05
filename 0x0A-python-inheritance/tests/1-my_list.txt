@@ -20,6 +20,9 @@ Example of Usage
 	Valid Usage
 	-----------
 	>>> my_list = MyList()
+	>>> my_list.print_sorted()
+	[]
+	
 	>>> my_list.append(1)
 	>>> my_list.print_sorted()
 	[1]
