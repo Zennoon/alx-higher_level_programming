@@ -74,8 +74,3 @@ class Square(Rectangle):
     def area(self):
         """Calculates and returns the area of the calling instance."""
         return (self.__size ** 2)
-
-
-s = Square(13)
-print(s)
-print(s.area())
