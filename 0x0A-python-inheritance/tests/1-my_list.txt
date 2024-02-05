@@ -140,8 +140,18 @@ Example of Usage
 	TypeError: ...
 
 
-	Incorrect Number of Arguments
-	-----------------------------
+	Incorrect Arguments /  Number of Arguments
+	------------------------------------------
+	>>> my_list3 = MyList(1) # doctest: +ELLIPSIS
+        Traceback (most recent call last):
+                  ...
+        TypeError: ...
+
+	>>> my_list3 = MyList((1, 2, 3, 4), True) # doctest: +ELLIPSIS
+        Traceback (most recent call last):
+                  ...
+        TypeError: ...
+
 	>>> my_list3 = MyList((1, 2, 3, 4))
 	>>> my_list3.print_sorted("Arg") # doctest: +ELLIPSIS
         Traceback (most recent call last):
