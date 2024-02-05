@@ -23,6 +23,11 @@ Example of Usage
 	>>> my_list.print_sorted()
 	[]
 
+	>>> my_list = MyList((4, 3, 2, 1))
+	>>> my_list.print_sorted()
+	[1, 2, 3, 4]
+
+	>>> my_list.clear()
 	>>> my_list.append(None)
 	>>> my_list.print_sorted()
 	[None]
@@ -51,6 +56,11 @@ Example of Usage
 	>>> my_list.append(-22.5)
 	>>> my_list.print_sorted()
 	[-89, -22.5, -10, -1, 0, 1, 10, 12.5, 98]
+
+	>>> my_list.clear()
+	>>> my_list.append(1 + 1j)
+	>>> my_list.print_sorted()
+	[(1+1j)]
 
 	>>> my_list.clear()
 	>>> my_list.append("Alpha")
@@ -112,3 +122,28 @@ Example of Usage
 	Traceback (most recent call last):
 		  ...
 	TypeError: ...
+
+	>>> my_list2.clear()
+	>>> my_list2.append(1 + 1j)
+	>>> my_list2.append(2 + 1j)
+	>>> my_list2.print_sorted() # doctest: +ELLIPSIS
+	Traceback (most recent call last):
+		  ...
+	TypeError: ...
+
+	>>> my_list2.clear()
+	>>> my_list2.append([1, 2, 3])
+	>>> my_list2.append((1, 2, 3))
+	>>> my_list2.print_sorted() # doctest: +ELLIPSIS
+	Traceback (most recent call last):
+		  ...
+	TypeError: ...
+
+
+	Incorrect Number of Arguments
+	-----------------------------
+	>>> my_list3 = MyList((1, 2, 3, 4))
+	>>> my_list3.print_sorted("Arg") # doctest: +ELLIPSIS
+        Traceback (most recent call last):
+                  ...
+        TypeError: ...
