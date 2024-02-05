@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-"""8-rectangle.py
+"""9-rectangle.py
 
 Author: Yunus Kedir
 
@@ -45,6 +45,6 @@ class Rectangle(BaseGeometry):
         integer_validator function found in the base class.
         """
         super().integer_validator("width", width)
-        self.__width = width
         super().integer_validator("height", height)
+        self.__width = width
         self.__height = height
