@@ -57,4 +57,6 @@ class Student(object):
             json: The dictionary to replace from.
         """
         if json is not None:
-            self.__dict__ = json
+            for key in json.keys():
+                if self.__dict__.get(key) is not None:
+                    self.__dict__[key] = json[key]
