@@ -56,4 +56,5 @@ class Student(object):
         Args:
             json: The dictionary to replace from.
         """
-        self.__dict__ = json
+        if json is not None:
+            self.__dict__ = json
