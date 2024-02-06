@@ -14,10 +14,11 @@ Functions:
 
 import json
 
+
 def from_json_string(my_str):
     """Returns the Python object that a given JSON string deserializes to.
 
-    Uses the json module's loads method. Not all JSON strings are deserializable
+    Uses json module's loads method. Not all JSON strings are deserializable
     . If a non-deserializable string is passed, the method will raise an error.
 
     Args:
