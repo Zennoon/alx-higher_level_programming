@@ -89,7 +89,7 @@ def pascal_triangle(n):
     of size n.
 
     The pascal triangle is composed of lists that each have the coefficients
-    of expansion of a given power. This power goes from 0 upto n - 1 if n is the
+    of expansion of a given power. This power goes from 0 upto n - 1 if n ==
     requested size of the triangle. Therefore, the returned list is of size n.
 
     Args:
