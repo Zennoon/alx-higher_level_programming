@@ -1,5 +1,5 @@
 Python is cool.
 And so is C.
 But python is so much easier to learn and use.
-But C is really exciting, cause you get to know the nitty gritty
+JavascriptBut C is really exciting, cause you get to know the nitty gritty
 Ultimately, I love both.
