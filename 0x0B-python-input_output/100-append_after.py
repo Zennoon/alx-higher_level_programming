@@ -32,3 +32,6 @@ def append_after(filename="", search_string="", new_string=""):
             lines[idx] += new_string
     with open(filename, 'w', encoding="utf-8") as f:
         f.write(''.join(lines))
+
+
+append_after("file.txt", "python", "c\n")
