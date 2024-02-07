@@ -7,9 +7,9 @@ Author: Yunus Kedir
 This module contains:
 
 Functions:
-    append_after - Appends a given string to a file in a new line each time some
-                   string is found in the file. The line is added after the line
-                   in which the search string was found.
+    append_after - Appends a given string to file in a new line each time some
+                   string is found in the file. The line is added after the
+                   line in which the search string was found.
 
 """
 
