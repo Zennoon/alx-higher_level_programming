@@ -396,3 +396,9 @@ class TestRectangle(unittest.TestCase):
             Rectangle.save_to_file("string")
         with self.assertRaises(AttributeError):
             Rectangle.save_to_file([1, 2, 3, 4])
+
+    def test_from_json_string(self):
+        """Tests the from_json_string method of the Base class."""
+        r = Rectangle(10, 10)
+        json_str = r.to_json_string([r.to_dictionary()])
+        self.assertEqual(r.from_json_string(json_str), [r.to_dictionary()])

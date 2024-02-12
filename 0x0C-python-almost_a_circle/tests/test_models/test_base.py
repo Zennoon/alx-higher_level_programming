@@ -99,3 +99,13 @@ class TestBase(unittest.TestCase):
         self.assertEqual(b.to_json_string(1.5), '1.5')
         self.assertEqual(b.to_json_string([{'x': 1, 'y': 2}]),
                          '[{"x": 1, "y": 2}]')
+
+    def test_from_json_string(self):
+        """Tests the from_json_string method of the Base class."""
+        b = Base()
+        self.assertEqual(b.from_json_string(None), [])
+        self.assertEqual(b.from_json_string(""), [])
+        self.assertEqual(b.from_json_string('[]'), [])
+        self.assertEqual(b.from_json_string('"A string"'), "A string")
+        self.assertEqual(b.from_json_string('[{"x": 1, "y": 2}]'),
+                         [{"x": 1, "y": 2}])

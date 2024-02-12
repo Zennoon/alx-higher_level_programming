@@ -344,6 +344,7 @@ class TestSquare(unittest.TestCase):
 
     def test_to_json_string_method(self):
         """Tests the to_json_string method of the Base class."""
+        self.assertEqual(Square.to_json_string(None), '[]')
         s = Square(10)
         dct = s.to_dictionary()
         json_dct = s.to_json_string([dct])
@@ -358,6 +359,11 @@ class TestSquare(unittest.TestCase):
         Square.save_to_file([s, s2])
         with open("Square.json", 'r', encoding="utf-8") as f:
             self.assertEqual(json_str, f.read())
+        r = Rectangle(10, 10)
+        json_str = s.to_json_string([s.to_dictionary(), r.to_dictionary()])
+        Square.save_to_file([s, r])
+        with open("Square.json", 'r', encoding="utf-8") as f:
+            self.assertEqual(json_str, f.read())
         Square.save_to_file(None)
         with open("Square.json", 'r', encoding="utf-8") as f:
             self.assertEqual('[]', f.read())
@@ -368,3 +374,13 @@ class TestSquare(unittest.TestCase):
             Square.save_to_file("string")
         with self.assertRaises(AttributeError):
             Square.save_to_file([1, 2, 3, 4])
+
+    def test_from_json_string(self):
+        """Tests the from_json_string method of the Base class."""
+        s = Square(10)
+        json_str = s.to_json_string([s.to_dictionary()])
+        self.assertEqual(s.from_json_string(json_str), [s.to_dictionary()])
+        r = Rectangle(10, 10)
+        json_str = s.to_json_string([s.to_dictionary(), r.to_dictionary()])
+        self.assertEqual(s.from_json_string(json_str),
+                         [s.to_dictionary(), r.to_dictionary()])
