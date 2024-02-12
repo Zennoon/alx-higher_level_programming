@@ -251,3 +251,46 @@ class TestRectangle(unittest.TestCase):
 
         # Returning sys.stdout to original value
         sys.stdout = sys.__stdout__
+
+    def test_update_method(self):
+        """Tests the update method of the Rectangle class."""
+        r = Rectangle(10, 10)
+        r.update()
+        self.assertEqual(str(r),
+    "[Rectangle] ({}) 0/0 - 10/10".format(Base.__dict__["_Base__nb_objects"]))
+        r.update(0)
+        self.assertEqual(str(r), "[Rectangle] (0) 0/0 - 10/10")
+        r.update(1, 2)
+        self.assertEqual(str(r), "[Rectangle] (1) 0/0 - 2/10")
+        r.update(3, 4, 5)
+        self.assertEqual(str(r), "[Rectangle] (3) 0/0 - 4/5")
+        r.update(6, 7, 8, 9)
+        self.assertEqual(str(r), "[Rectangle] (6) 9/0 - 7/8")
+        r.update(10, 11, 12, 13, 14)
+        self.assertEqual(str(r), "[Rectangle] (10) 13/14 - 11/12")
+        r.update(15, 16, 17, 18, 19, "Extra args ignored")
+        self.assertEqual(str(r), "[Rectangle] (15) 18/19 - 16/17")
+
+    def test_update_method_type_validation(self):
+        """Tests that the attrs type validation still works on update."""
+        r = Rectangle(1, 2, 3, 4, 5)
+        with self.assertRaises(TypeError):
+            r.update(98, '1')
+        with self.assertRaises(TypeError):
+            r.update(98, 1, '2')
+        with self.assertRaises(TypeError):
+            r.update(98, 1, 2, '3')
+        with self.assertRaises(TypeError):
+            r.update(98, 1, 2, 3, '4')
+
+    def test_update_method_value_validation(self):
+        """Tests that the attrs value validation still works on update."""
+        r = Rectangle(1, 2, 3, 4, 5)
+        with self.assertRaises(ValueError):
+            r.update(98, 0)
+        with self.assertRaises(ValueError):
+            r.update(98, 1, 0)
+        with self.assertRaises(ValueError):
+            r.update(98, 1, 2, -1)
+        with self.assertRaises(ValueError):
+            r.update(98, 1, 2, 3, -1)
