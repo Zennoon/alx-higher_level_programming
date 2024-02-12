@@ -42,7 +42,7 @@ class TestSquare(unittest.TestCase):
     def test_valid_class(self):
         """Tests that the imported module contains the desired class."""
         self.assertEqual(Square.__class__.__name__, "type")
-        s = Square(1, 1)
+        s = Square(1)
         self.assertIsInstance(s, Square)
 
     def test_inheritance(self):
@@ -72,24 +72,29 @@ class TestSquare(unittest.TestCase):
             print(s.__y)
 
     def test_size_attr(self):
-        """Tests the getter and setter (and its validation) of the size
-        attribute."""
+        """Tests the size getter and setter (and its validation)."""
         s = Square(10)
-        self.assertEqual(s.width, 10)
-        s.width = s.width * 2
+        self.assertEqual(s.size, 10)
+        s.size = s.size * 2
+        self.assertEqual(s.size, 20)
         self.assertEqual(s.width, 20)
+        self.assertEqual(s.height, 20)
+        s.width = 25
+        self.assertEqual(s.size, 25)
+        self.assertEqual(s.width, 25)
+        self.assertEqual(s.height, 20)
         for wrong_type in [1.0, 1 + 1j, "1", [1], {}]:
             with self.assertRaises(TypeError):
                 s = Square(wrong_type, 1, 1, 1)
             with self.assertRaises(TypeError):
                 s = Square(1, 1, 1)
-                s.width = wrong_type
+                s.size = wrong_type
         for wrong_val in [0, -1]:
             with self.assertRaises(ValueError):
                 s = Square(wrong_val, 1, 1)
             with self.assertRaises(ValueError):
                 s = Square(1, 1, 1)
-                s.width = wrong_val
+                s.size = wrong_val
 
     def test_x_attr(self):
         """Tests the getter and setter (and its validation) of the x
@@ -148,11 +153,11 @@ class TestSquare(unittest.TestCase):
         """Tests the area method of the Square class."""
         s = Square(10, 5, 5)
         self.assertEqual(s.area(), 100)
-        s.width = 5
-        s.height = 5
+        s.size = 5
         self.assertEqual(s.area(), 25)
         s.width = 2
-        s.height = 2
+        self.assertEqual(s.area(), 10)
+        s.size = 2
         self.assertEqual(s.area(), 4)
         s.x = 0
         s.y = 0
@@ -175,8 +180,7 @@ class TestSquare(unittest.TestCase):
 
         output = io.StringIO()
         sys.stdout = output
-        s.width = 5
-        s.height = 5
+        s.size = 5
         s.display()
         self.assertEqual(output.getvalue(),
                          "#####\n#####\n#####\n#####\n#####\n")
@@ -200,8 +204,7 @@ class TestSquare(unittest.TestCase):
 
         output = io.StringIO()
         sys.stdout = output
-        s.width = 2
-        s.height = 2
+        s.size = 2
         s.x = 3
         s.y = 2
         s.display()
@@ -224,7 +227,7 @@ class TestSquare(unittest.TestCase):
 
         output = io.StringIO()
         sys.stdout = output
-        s.width = 12
+        s.size = 12
         s.x = 2
         s.y = 3
         s.id = 98
@@ -246,33 +249,31 @@ class TestSquare(unittest.TestCase):
         s.update(1, 2)
         self.assertEqual(str(s), "[Square] (1) 0/0 - 2")
         s.update(3, 4, 5)
-        self.assertEqual(str(s), "[Square] (3) 0/0 - 4")
+        self.assertEqual(str(s), "[Square] (3) 5/0 - 4")
         s.update(6, 7, 8, 9)
-        self.assertEqual(str(s), "[Square] (6) 9/0 - 7")
-        s.update(10, 11, 12, 13, 14)
-        self.assertEqual(str(s), "[Square] (10) 13/14 - 11")
-        s.update(15, 16, 17, 18, 19, "Extra args ignored")
-        self.assertEqual(str(s), "[Square] (15) 18/19 - 16")
+        self.assertEqual(str(s), "[Square] (6) 8/9 - 7")
+        s.update(10, 11, 12, 13, "Extra args ignored")
+        self.assertEqual(str(s), "[Square] (10) 12/13 - 11")
 
     def test_update_method_kwargs(self):
         s = Square(10)
         s.update(id=100)
         self.assertEqual(str(s), "[Square] (100) 0/0 - 10")
-        s.update(width=12, id=25)
+        s.update(size=12, id=25)
         self.assertEqual(str(s), "[Square] (25) 0/0 - 12")
-        s.update(height=15, width=6, id=98)
+        s.update(size=6, id=98)
         self.assertEqual(str(s), "[Square] (98) 0/0 - 6")
-        s.update(height=15, volume="Doesn't exist", width=6, id=98, z='z')
-        self.assertEqual(str(s), "[Square] (98) 0/0 - 6")
-        s.update(x=20, width=6, id=8, y=7, height=21)
-        self.assertEqual(str(s), "[Square] (8) 20/7 - 6")
-        s.update(x=20, width=6, id=9, y=7, height=21)
+        s.update(x=15, volume="Doesn't exist", size=6, id=98, z='z')
+        self.assertEqual(str(s), "[Square] (98) 15/0 - 6")
+        s.update(x=20, height="Not for Square", id=8, y=7, size=21)
+        self.assertEqual(str(s), "[Square] (8) 20/7 - 21")
+        s.update(x=20, size=6, id=9, y=7, width="Not for Square")
         self.assertEqual(str(s), "[Square] (9) 20/7 - 6")
         # kwargs ignored if args exists and not None
-        s.update(1, x=2, width=3, id=4, y=5, height=6)
+        s.update(1, x=2, width=3, id=4, y=5)
         self.assertEqual(str(s), "[Square] (1) 20/7 - 6")
         # Invalid types & vals ignored because kwargs is shadowed by args
-        s.update(0, x="wrong", width=-5, id=False, y=1.5, height={})
+        s.update(0, x="wrong", width=-5, id=False, y=1.5)
         self.assertEqual(str(s), "[Square] (0) 20/7 - 6")
 
     def test_update_method_type_validation(self):
@@ -285,15 +286,11 @@ class TestSquare(unittest.TestCase):
         with self.assertRaises(TypeError):
             s.update(98, 1, 2, '3')
         with self.assertRaises(TypeError):
-            s.update(98, 1, 2, 3, '4')
+            s.update(id=98, size='1')
         with self.assertRaises(TypeError):
-            s.update(id=98, width='1')
+            s.update(x=(1 + 2j), id=2)
         with self.assertRaises(TypeError):
-            s.update(height=(1 + 2j), width=2)
-        with self.assertRaises(TypeError):
-            s.update(width=1, id=5, x=[0])
-        with self.assertRaises(TypeError):
-            s.update(y={98}, width=1, x=2, height=3, id=25)
+            s.update(width=1, id=5, y=[0])
 
     def test_update_method_value_validation(self):
         """Tests that the attrs value validation still works on update."""
@@ -301,16 +298,12 @@ class TestSquare(unittest.TestCase):
         with self.assertRaises(ValueError):
             s.update(98, 0)
         with self.assertRaises(ValueError):
-            s.update(98, 1, 0)
+            s.update(98, 1, -1)
         with self.assertRaises(ValueError):
             s.update(98, 1, 2, -1)
         with self.assertRaises(ValueError):
-            s.update(98, 1, 2, 3, -1)
+            s.update(id=98, size=0)
         with self.assertRaises(ValueError):
-            s.update(id=98, width=0)
+            s.update(id=98, x=-1, size=15)
         with self.assertRaises(ValueError):
-            s.update(id=98, height=0, width=15)
-        with self.assertRaises(ValueError):
-            s.update(x=-1, width=1, height=2, id=-1)
-        with self.assertRaises(ValueError):
-            s.update(x=98, height=1, id=2, width=3, y=-1)
+            s.update(y=-1, x=1, size=2, id=-1)
