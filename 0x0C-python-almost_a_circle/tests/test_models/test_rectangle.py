@@ -429,3 +429,23 @@ class TestRectangle(unittest.TestCase):
         for idx, rect in enumerate(new_rs):
             self.assertIsInstance(rect, Rectangle)
             self.assertEqual(rect.to_dictionary(), old_rs[idx].to_dictionary())
+
+    def test_save_to_file_csv_load_from_file_csv_method(self):
+        """Tests the save_to_file_csv and load_from_file_csv methods of
+        the Base class."""
+        Rectangle.save_to_file_csv(None)
+        self.assertEqual(Rectangle.load_from_file_csv(), [])
+        Rectangle.save_to_file_csv([])
+        self.assertEqual(Rectangle.load_from_file_csv(), [])
+        r = Rectangle(10, 10)
+        r2 = Rectangle(1, 2, 3, 4)
+        Rectangle.save_to_file_csv([r, r2])
+        r3, r4 = Rectangle.load_from_file_csv()
+        self.assertIsInstance(r3, Rectangle)
+        self.assertIsInstance(r4, Rectangle)
+        self.assertEqual(r.to_dictionary(), r3.to_dictionary())
+        self.assertEqual(r2.to_dictionary(), r4.to_dictionary())
+        with self.assertRaises(AttributeError):
+            Rectangle.save_to_file("string")
+        with self.assertRaises(AttributeError):
+            Rectangle.save_to_file([1, 2, 3, 4])

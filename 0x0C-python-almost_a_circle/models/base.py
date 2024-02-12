@@ -13,6 +13,7 @@ Classes:
 
 
 import json
+import csv
 
 
 class Base(object):
@@ -67,7 +68,7 @@ class Base(object):
 
     @staticmethod
     def from_json_string(json_string):
-        """Returns apython object resulting from evaluation of a JSON string.
+        """Returns python object resulting from evaluation of a JSON string.
 
         Args:
             json_string (str): A json string that represents a python object.
@@ -107,4 +108,55 @@ class Base(object):
         f.close()
         for dct in obj_dcts:
             objs.append(cls.create(**dct))
+        return (objs)
+
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        """Saves instances of inheritors of the Base class to a file
+        in csv format.
+
+        Args:
+            list_objs (list): A list of instances of classes that inherit Base.
+
+        """
+        with open("{}.csv".format(cls.__name__), 'w', encoding="utf-8") as f:
+            csv_writer = csv.writer(f)
+            if list_objs is not None:
+                for obj in list_objs:
+                    dct = obj.to_dictionary()
+                    if obj.__class__.__name__ == "Rectangle":
+                        csv_writer.writerow([dct["id"], dct["width"],
+                                             dct["height"], dct['x'],
+                                             dct['y']])
+                    elif obj.__class__.__name__ == "Square":
+                        csv_writer.writerow([dct["id"], dct["size"],
+                                             dct['x'], dct['y']])
+
+    @classmethod
+    def load_from_file_csv(cls):
+        """Returns a list of instances created from csv rows stored in
+        a file."""
+        objs = []
+        with open("{}.csv".format(cls.__name__), 'r', encoding="utf-8") as f:
+            csv_reader = csv.reader(f)
+            for row in csv_reader:
+                dct = {}
+                if len(row) == 5:
+                    dct = {
+                        "id": row[0],
+                        "width": row[1],
+                        "height": row[2],
+                        'x': row[3],
+                        'y': row[4]
+                    }
+                elif len(row) == 4:
+                    dct = {
+                        "id": row[0],
+                        "size": row[1],
+                        'x': row[2],
+                        'y': row[3]
+                    }
+                for key, val in dct.items():
+                    dct[key] = int(val)
+                objs.append(cls.create(**dct))
         return (objs)

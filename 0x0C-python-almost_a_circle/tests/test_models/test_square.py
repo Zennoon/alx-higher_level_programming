@@ -408,3 +408,27 @@ class TestSquare(unittest.TestCase):
         new_rs = Square.load_from_file()
         for idx, sq in enumerate(new_rs):
             self.assertIsInstance(sq, Square)
+
+    def test_save_to_file_csv_load_from_file_csv_method(self):
+        """Tests the save_to_file_csv and load_from_file_csv methods of
+        the Base class."""
+        Square.save_to_file_csv(None)
+        self.assertEqual(Square.load_from_file_csv(), [])
+        Square.save_to_file_csv([])
+        self.assertEqual(Square.load_from_file_csv(), [])
+        s = Square(10)
+        s2 = Square(1, 2, 3, 4)
+        Square.save_to_file_csv([s, s2])
+        s3, s4 = Square.load_from_file_csv()
+        self.assertIsInstance(s3, Square)
+        self.assertIsInstance(s4, Square)
+        self.assertEqual(s.to_dictionary(), s3.to_dictionary())
+        self.assertEqual(s2.to_dictionary(), s4.to_dictionary())
+        r = Rectangle(10, 10)
+        Square.save_to_file_csv([r])
+        s5 = Square.load_from_file()[0]
+        self.assertIsInstance(s5, Square)
+        with self.assertRaises(AttributeError):
+            Square.save_to_file("string")
+        with self.assertRaises(AttributeError):
+            Square.save_to_file([1, 2, 3, 4])
