@@ -59,33 +59,85 @@ class TestRectangle(unittest.TestCase):
         with self.assertRaises(AttributeError):
             print(r.__y)
 
-    def test_width(self):
-        """Tests the getter and setter of the width attribute."""
+    def test_width_attr(self):
+        """Tests the getter and setter (and its validation) of the width
+        attribute."""
         r = Rectangle(10, 10)
         self.assertEqual(r.width, 10)
         r.width = r.width * 2
         self.assertEqual(r.width, 20)
+        for wrong_type in [1.0, 1 + 1j, "1", [1], {}]:
+            with self.assertRaises(TypeError):
+                r = Rectangle(wrong_type, 1, 1, 1)
+            with self.assertRaises(TypeError):
+                r = Rectangle(1, 1, 1, 1)
+                r.width = wrong_type
+        for wrong_val in [0, -1]:
+            with self.assertRaises(ValueError):
+                r = Rectangle(wrong_val, 1, 1, 1)
+            with self.assertRaises(ValueError):
+                r = Rectangle(1, 1, 1, 1)
+                r.width = wrong_val
 
-    def test_height(self):
-        """Tests the getter and setter of the height attribute."""
+    def test_height_attr(self):
+        """Tests the getter and setter (and its validation) of the height
+        attribute."""
         r = Rectangle(10, 10)
         self.assertEqual(r.height, 10)
-        r.height = r.height / 2
+        r.height = r.height // 2
         self.assertEqual(r.height, 5)
+        for wrong_type in [1.0, 1 + 1j, "1", [1], {}]:
+            with self.assertRaises(TypeError):
+                r = Rectangle(1, wrong_type, 1, 1)
+            with self.assertRaises(TypeError):
+                r = Rectangle(1, 1, 1, 1)
+                r.height = wrong_type
+        for wrong_val in [0, -1]:
+            with self.assertRaises(ValueError):
+                r = Rectangle(1, wrong_val, 1, 1)
+            with self.assertRaises(ValueError):
+                r = Rectangle(1, 1, 1, 1)
+                r.height = wrong_val
 
-    def test_x_coord(self):
-        """Tests the getter and setter of the x attribute."""
+    def test_x_attr(self):
+        """Tests the getter and setter (and its validation) of the x
+        attribute."""
         r = Rectangle(10, 10)
         self.assertEqual(r.x, 0)
         r.x = 2
         self.assertEqual(r.x, 2)
+        for wrong_type in [1.0, 1 + 1j, "1", [1], {}]:
+            with self.assertRaises(TypeError):
+                r = Rectangle(1, 1, wrong_type, 1)
+            with self.assertRaises(TypeError):
+                r = Rectangle(1, 1, 1, 1)
+                r.x = wrong_type
+        for wrong_val in [-1, -100]:
+            with self.assertRaises(ValueError):
+                r = Rectangle(1, 1, wrong_val, 1)
+            with self.assertRaises(ValueError):
+                r = Rectangle(1, 1, 1, 1)
+                r.x = wrong_val
 
-    def test_y_coord(self):
-        """Tests the getter and setter of the y attribute."""
+    def test_y_attr(self):
+        """Tests the getter and setter (and its validation) of the y
+        attribute."""
         r = Rectangle(10, 10)
         self.assertEqual(r.y, 0)
         r.y = 3
         self.assertEqual(r.y, 3)
+        for wrong_type in [1.0, 1 + 1j, "1", [1], {}]:
+            with self.assertRaises(TypeError):
+                r = Rectangle(1, 1, 1, wrong_type)
+            with self.assertRaises(TypeError):
+                r = Rectangle(1, 1, 1, 1)
+                r.y = wrong_type
+        for wrong_val in [-1, -100]:
+            with self.assertRaises(ValueError):
+                r = Rectangle(1, 1, 1, wrong_val)
+            with self.assertRaises(ValueError):
+                r = Rectangle(1, 1, 1, 1)
+                r.y = wrong_val
 
     def test_id(self):
         """Tests the id attribute of the Rectangle instance."""

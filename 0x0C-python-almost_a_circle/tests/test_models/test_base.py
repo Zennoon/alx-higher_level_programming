@@ -47,12 +47,10 @@ class TestBase(unittest.TestCase):
 
     def test_id_None(self):
         """Tests the Base class with default id value (None)."""
-        b = Base()
-        self.assertEqual(b.id, Base.__dict__["_Base__nb_objects"])
-        b = Base()
-        self.assertEqual(b.id, Base.__dict__["_Base__nb_objects"])
-        b = Base()
-        self.assertEqual(b.id, Base.__dict__["_Base__nb_objects"])
+        for i in range(5):
+            with self.subTest(i=i):
+                b = Base()
+                self.assertEqual(b.id, Base.__dict__["_Base__nb_objects"])
         b = Base(None)
         self.assertEqual(b.id, Base.__dict__["_Base__nb_objects"])
 
