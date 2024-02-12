@@ -165,38 +165,44 @@ class Base(object):
     @staticmethod
     def draw(list_rectangles, list_squares):
         """Uses the turtle module to draw squares and rectangles."""
-        sum = 0
+        sum_width = 0
+        turtle.width(2)
         turtle.penup()
-        turtle.right(180)
+        turtle.left(90)
         turtle.forward(200)
+        turtle.left(90)
+        turtle.forward(300)
         turtle.right(180)
         turtle.pendown()
         turtle.color('red')
 
         for rect in list_rectangles:
-            sum += rect.width
+            sum_width += 20 + (rect.width * 10)
             for i in range(2):
-                turtle.forward(rect.width * 5)
+                turtle.forward(rect.width * 10)
                 turtle.right(90)
-                turtle.forward(rect.height * 5)
+                turtle.forward(rect.height * 10)
                 turtle.right(90)
+            turtle.forward(rect.width * 10)
             turtle.penup()
             turtle.forward(20)
             turtle.pendown()
 
         turtle.penup()
         turtle.right(90)
-        turtle.forward(400)
+        turtle.forward(200)
         turtle.right(90)
-        turtle.forward(sum)
+        turtle.forward(sum_width)
         turtle.right(180)
         turtle.color('green')
         turtle.pendown()
 
         for sq in list_squares:
             for i in range(4):
-                turtle.forward(sq.size)
+                turtle.forward(sq.size * 10)
                 turtle.right(90)
+            turtle.forward(sq.size * 10)
             turtle.penup()
             turtle.forward(20)
             turtle.pendown()
+        turtle.mainloop()
