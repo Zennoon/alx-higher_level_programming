@@ -252,8 +252,8 @@ class TestRectangle(unittest.TestCase):
         # Returning sys.stdout to original value
         sys.stdout = sys.__stdout__
 
-    def test_update_method(self):
-        """Tests the update method of the Rectangle class."""
+    def test_update_method_args(self):
+        """Tests the update method of the Rectangle class with *args."""
         r = Rectangle(10, 10)
         r.update()
         self.assertEqual(str(r),
@@ -271,8 +271,29 @@ class TestRectangle(unittest.TestCase):
         r.update(15, 16, 17, 18, 19, "Extra args ignored")
         self.assertEqual(str(r), "[Rectangle] (15) 18/19 - 16/17")
 
+    def test_update_method_kwargs(self):
+        r = Rectangle(10, 10)
+        r.update(id=100)
+        self.assertEqual(str(r), "[Rectangle] (100) 0/0 - 10/10")
+        r.update(width=12, id=25)
+        self.assertEqual(str(r), "[Rectangle] (25) 0/0 - 12/10")
+        r.update(height=15, width=6, id=98)
+        self.assertEqual(str(r), "[Rectangle] (98) 0/0 - 6/15")
+        r.update(height=15, volume="Doesn't exist", width=6, id=98, z='z')
+        self.assertEqual(str(r), "[Rectangle] (98) 0/0 - 6/15")
+        r.update(x=20, width=6, id=8, y=7, height=21)
+        self.assertEqual(str(r), "[Rectangle] (8) 20/7 - 6/21")
+        r.update(x=20, width=6, id=8, y=7, height=21)
+        self.assertEqual(str(r), "[Rectangle] (8) 20/7 - 6/21")
+        # kwargs ignored if args exists and not None
+        r.update(1, x=2, width=3, id=4, y=5, height=6)
+        self.assertEqual(str(r), "[Rectangle] (1) 20/7 - 6/21")
+        # Invalid types ignored because kwargs is shadowed by args
+        r.update(0, x="wrong", width=[5], id=False, y=1.5, height={})
+        self.assertEqual(str(r), "[Rectangle] (0) 20/7 - 6/21")
+
     def test_update_method_type_validation(self):
-        """Tests that the attrs type validation still works on update."""
+        """Tests that the attrs type validation works on update."""
         r = Rectangle(1, 2, 3, 4, 5)
         with self.assertRaises(TypeError):
             r.update(98, '1')
@@ -282,6 +303,14 @@ class TestRectangle(unittest.TestCase):
             r.update(98, 1, 2, '3')
         with self.assertRaises(TypeError):
             r.update(98, 1, 2, 3, '4')
+        with self.assertRaises(TypeError):
+            r.update(id=98, width='1')
+        with self.assertRaises(TypeError):
+            r.update(height=(1 + 2j), width=2)
+        with self.assertRaises(TypeError):
+            r.update(width=1, id=5, x=[0])
+        with self.assertRaises(TypeError):
+            r.update(y={98}, width=1, x=2, height=3, id=25)
 
     def test_update_method_value_validation(self):
         """Tests that the attrs value validation still works on update."""
@@ -294,3 +323,11 @@ class TestRectangle(unittest.TestCase):
             r.update(98, 1, 2, -1)
         with self.assertRaises(ValueError):
             r.update(98, 1, 2, 3, -1)
+        with self.assertRaises(ValueError):
+            r.update(id=98, width=0)
+        with self.assertRaises(ValueError):
+            r.update(id=98, height=0, width=15)
+        with self.assertRaises(ValueError):
+            r.update(x=-1, width=1, height=2, id=-1)
+        with self.assertRaises(ValueError):
+            r.update(x=98, height=1, id=2, width=3, y=-1)

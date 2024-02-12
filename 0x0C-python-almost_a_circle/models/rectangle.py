@@ -92,25 +92,41 @@ class Rectangle(Base):
             raise ValueError("y must be >= 0")
         self.__y = value
 
-    def update(self, *args):
+    def update(self, *args, **kwargs):
         """Updates the values of the attributes.
 
         Args:
-            args (tuple): The values to change the attributes to.
+            args (tuple): Tuple of values to change the attributes to.
                           1st argument should be the id attribute
                           2nd argument should be the width attribute
                           3rd argument should be the height attribute
                           4th argument should be the x attribute
                           5th argument should be the y attribute
+
+            kwargs (dict): Dict of key - value pairs representing attribute
+                           names and values to change them to.
         """
-        try:
-            self.id = args[0]
-            self.width = args[1]
-            self.height = args[2]
-            self.x = args[3]
-            self.y = args[4]
-        except IndexError:
-            pass
+        if args is None or len(args) == 0:
+            if kwargs is not None:
+                if kwargs.get("id") is not None:
+                    self.id = kwargs["id"]
+                if kwargs.get("width") is not None:
+                    self.width = kwargs["width"]
+                if kwargs.get("height") is not None:
+                    self.height = kwargs["height"]
+                if kwargs.get("x") is not None:
+                    self.x = kwargs["x"]
+                if kwargs.get("y") is not None:
+                    self.y = kwargs["y"]
+        else:
+            try:
+                self.id = args[0]
+                self.width = args[1]
+                self.height = args[2]
+                self.x = args[3]
+                self.y = args[4]
+            except IndexError:
+                pass
 
     def area(self):
         """Returns the area of the Rectangle instance."""
