@@ -78,3 +78,9 @@ class Base(object):
         if json_string is None or json_string == "":
             return ([])
         return (json.loads(json_string))
+
+    @classmethod
+    def create(cls, **dictionary):
+        instance = cls(10, 10)
+        instance.update(**dictionary)
+        return (instance)

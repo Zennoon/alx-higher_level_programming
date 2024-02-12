@@ -384,3 +384,13 @@ class TestSquare(unittest.TestCase):
         json_str = s.to_json_string([s.to_dictionary(), r.to_dictionary()])
         self.assertEqual(s.from_json_string(json_str),
                          [s.to_dictionary(), r.to_dictionary()])
+
+    def test_create_method(self):
+        """Tests the create method of the Base class."""
+        s = Square(10)
+        dct = s.to_dictionary()
+        s2 = Square.create(**dct)
+        self.assertIsInstance(s2, Square)
+        self.assertEqual(s.to_dictionary(), s2.to_dictionary())
+        with self.assertRaises(TypeError):
+            Square.create(None)

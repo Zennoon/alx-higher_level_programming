@@ -402,3 +402,13 @@ class TestRectangle(unittest.TestCase):
         r = Rectangle(10, 10)
         json_str = r.to_json_string([r.to_dictionary()])
         self.assertEqual(r.from_json_string(json_str), [r.to_dictionary()])
+
+    def test_create_method(self):
+        """Tests the create method of the Base class."""
+        r = Rectangle(10, 10)
+        dct = r.to_dictionary()
+        r2 = Rectangle.create(**dct)
+        self.assertIsInstance(r2, Rectangle)
+        self.assertEqual(r.to_dictionary(), r2.to_dictionary())
+        with self.assertRaises(TypeError):
+            Rectangle.create(None)
