@@ -33,6 +33,13 @@ class Rectangle(Base):
         self.y = y
         super().__init__(id)
 
+    def __str__(self):
+        """Magic method to handle the print and str functions on an instance."""
+        return ("[{}] ({}) {}/{} - {}/{}".format(self.__class__.__name__,
+                                                 self.id,
+                                                 self.__x, self.__y,
+                                                 self.__width, self.__height))
+
     @property
     def width(self):
         """Getter and setter pair for the width private instance attribute."""

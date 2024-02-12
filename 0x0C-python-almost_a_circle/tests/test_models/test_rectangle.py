@@ -13,6 +13,8 @@ Classes:
 
 
 import unittest
+import sys
+import io
 import models.rectangle as rectangle
 import models.base as base
 
@@ -174,9 +176,6 @@ class TestRectangle(unittest.TestCase):
 
     def test_display_method(self):
         """Tests the display method of the Rectangle class."""
-        import sys
-        import io
-
         # Redirecting sys.stdout to a io object to capture the output
         output = io.StringIO()
         sys.stdout = output
@@ -198,5 +197,30 @@ class TestRectangle(unittest.TestCase):
         r.display()
         self.assertEqual(output.getvalue(),
                          "#####\n#####\n#####\n#####\n#####\n#####\n")
+        # Returning sys.stdout to original value
+        sys.stdout = sys.__stdout__
+
+    def test_str_method(self):
+        """Tests the __str__ method of the Rectangle class."""
+        # Redirecting sys.stdout to a io object to capture the output
+        output = io.StringIO()
+        sys.stdout = output
+        r = Rectangle(10, 10)
+        self.assertEqual(str(r),
+    "[Rectangle] ({}) 0/0 - 10/10".format(Base.__dict__["_Base__nb_objects"]))
+        print(r)
+        self.assertEqual(output.getvalue(),
+    "[Rectangle] ({}) 0/0 - 10/10\n".format(Base.__dict__["_Base__nb_objects"]))
+
+        output = io.StringIO()
+        sys.stdout = output
+        r.width = 12
+        r.height = r.height // 2
+        r.x = 2
+        r.y = 3
+        r.id = 98
+        self.assertEqual(str(r), "[Rectangle] (98) 2/3 - 12/5")
+        print(r)
+        self.assertEqual(output.getvalue(), "[Rectangle] (98) 2/3 - 12/5\n")
         # Returning sys.stdout to original value
         sys.stdout = sys.__stdout__
