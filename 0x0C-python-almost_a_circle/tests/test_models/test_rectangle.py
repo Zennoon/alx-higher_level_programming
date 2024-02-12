@@ -185,8 +185,7 @@ class TestRectangle(unittest.TestCase):
 
         output = io.StringIO()
         sys.stdout = output
-        r.width = 3
-        r.height = 4
+        r = Rectangle(3, 4, 0, 0)
         r.display()
         self.assertEqual(output.getvalue(), "###\n###\n###\n###\n")
 
@@ -197,6 +196,33 @@ class TestRectangle(unittest.TestCase):
         r.display()
         self.assertEqual(output.getvalue(),
                          "#####\n#####\n#####\n#####\n#####\n#####\n")
+
+        # Returning sys.stdout to original value
+        sys.stdout = sys.__stdout__
+
+    def test_display_method_with_xy(self):
+        """Tests the display method when the x, and y values are not 0."""
+        output = io.StringIO()
+        sys.stdout = output
+        r = Rectangle(1, 1, 3, 5)
+        r.display()
+        self.assertEqual(output.getvalue(), "\n\n\n\n\n   #\n")
+
+        output = io.StringIO()
+        sys.stdout = output
+        r = Rectangle(3, 4, 2, 1)
+        r.display()
+        self.assertEqual(output.getvalue(), "\n  ###\n  ###\n  ###\n  ###\n")
+
+        output = io.StringIO()
+        sys.stdout = output
+        r.width = 2
+        r.height = 3
+        r.x = 3
+        r.y = 2
+        r.display()
+        self.assertEqual(output.getvalue(), "\n\n   ##\n   ##\n   ##\n")
+
         # Returning sys.stdout to original value
         sys.stdout = sys.__stdout__
 
@@ -222,5 +248,6 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(str(r), "[Rectangle] (98) 2/3 - 12/5")
         print(r)
         self.assertEqual(output.getvalue(), "[Rectangle] (98) 2/3 - 12/5\n")
+
         # Returning sys.stdout to original value
         sys.stdout = sys.__stdout__
