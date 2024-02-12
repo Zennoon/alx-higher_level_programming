@@ -14,6 +14,7 @@ Classes:
 
 import json
 import csv
+import turtle
 
 
 class Base(object):
@@ -160,3 +161,24 @@ class Base(object):
                     dct[key] = int(val)
                 objs.append(cls.create(**dct))
         return (objs)
+
+    @staticmethod
+    def draw(list_rectangles, list_squares):
+        """Uses the turtle module to draw squares and rectangles."""
+        for rect in list_rectangles:
+            for i in range(2):
+                turtle.forward(rect.width)
+                turtle.right(90)
+                turtle.forward(rect.height)
+                turtle.right(90)
+            turtle.left(360 / len(list_rectangles))
+
+        turtle.penup()
+        turtle.forward(500)
+        turtle.pendown()
+
+        for sq in list_squares:
+            for i in range(4):
+                turtle.forward(sq.size)
+                turtle.right(90)
+            turtle.left(360 / len(list_squares))
