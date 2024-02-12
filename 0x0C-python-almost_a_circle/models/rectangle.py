@@ -34,7 +34,7 @@ class Rectangle(Base):
         super().__init__(id)
 
     def __str__(self):
-        """Magic method to handle the print and str functions on an instance."""
+        """Magic method to handle print and str functions on an instance."""
         return ("[{}] ({}) {}/{} - {}/{}".format(self.__class__.__name__,
                                                  self.id,
                                                  self.__x, self.__y,
@@ -138,3 +138,13 @@ class Rectangle(Base):
         for i in range(self.__height):
             print(" " * self.__x, end="")
             print('#' * self.__width)
+
+    def to_dictionary(self):
+        obj_dict = {
+            'x': self.__x,
+            'y': self.__y,
+            'width': self.__width,
+            'height': self.__height,
+            'id': self.id
+        }
+        return (obj_dict)

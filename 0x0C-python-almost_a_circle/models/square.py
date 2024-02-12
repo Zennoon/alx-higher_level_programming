@@ -34,10 +34,10 @@ class Square(Rectangle):
         super().__init__(size, size, x, y, id)
 
     def __str__(self):
-        """Magic method to handle the print and str functions on an instance."""
+        """Magic method to handle print and str functions on an instance."""
         return ("[{}] ({}) {}/{} - {}".format(self.__class__.__name__,
-                                            self.id, self.x, self.y,
-                                            self.width))
+                                              self.id, self.x, self.y,
+                                              self.width))
 
     @property
     def size(self):
@@ -80,3 +80,13 @@ class Square(Rectangle):
                 self.y = args[3]
             except IndexError:
                 pass
+
+    def to_dictionary(self):
+        """Returns a dictionary representation of a Square instance."""
+        obj_dct = {
+            'x': self.x,
+            'y': self.y,
+            "size": self.size,
+            "id": self.id
+        }
+        return (obj_dct)

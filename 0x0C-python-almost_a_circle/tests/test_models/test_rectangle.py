@@ -15,6 +15,7 @@ Classes:
 import unittest
 import sys
 import io
+import json
 import models.rectangle as rectangle
 import models.base as base
 
@@ -331,3 +332,67 @@ class TestRectangle(unittest.TestCase):
             r.update(x=-1, width=1, height=2, id=-1)
         with self.assertRaises(ValueError):
             r.update(x=98, height=1, id=2, width=3, y=-1)
+
+    def test_to_dictionary_method(self):
+        """Tests the to_dictionary method of the Rectangle class."""
+        r = Rectangle(1, 2, 3, 4, 5)
+        self.assertIsInstance(r.to_dictionary(), dict)
+        self.assertEqual(r.to_dictionary(), {
+            'x': 3,
+            'y': 4,
+            "width": 1,
+            "height": 2,
+            "id": 5
+        }
+        )
+        r2 = Rectangle(5, 5)
+        self.assertEqual(r2.to_dictionary(), {
+            'x': 0,
+            'y': 0,
+            "width": 5,
+            "height": 5,
+            "id": r2.id
+        }
+        )
+        r2.width = 10
+        self.assertEqual(r2.to_dictionary(), {
+            'x': 0,
+            'y': 0,
+            "width": 10,
+            "height": 5,
+            "id": r2.id
+        }
+        )
+        dct = r.to_dictionary()
+        r2.update(**dct)
+        self.assertEqual(r2.to_dictionary(), dct)
+        self.assertIsNot(r, r2)
+
+    def test_to_json_string_method(self):
+        """Tests the to_json_string method of the Base class."""
+        self.assertEqual(Rectangle.to_json_string(None), '[]')
+        self.assertEqual(Rectangle.to_json_string([]), '[]')
+        r = Rectangle(10, 10)
+        dct = r.to_dictionary()
+        json_str = r.to_json_string([dct])
+        self.assertIsInstance(json_str, str)
+        self.assertEqual(json_str, json.dumps([dct], sort_keys=True))
+
+    def test_save_to_file_method(self):
+        """Tests the save_to_file method of the Base class."""
+        r = Rectangle(10, 10)
+        r2 = Rectangle(1, 2, 3, 4, 5)
+        json_str = r.to_json_string([r.to_dictionary(), r2.to_dictionary()])
+        Rectangle.save_to_file([r, r2])
+        with open("Rectangle.json", 'r', encoding="utf-8") as f:
+            self.assertEqual(json_str, f.read())
+        Rectangle.save_to_file(None)
+        with open("Rectangle.json", 'r', encoding="utf-8") as f:
+            self.assertEqual('[]', f.read())
+        Rectangle.save_to_file([])
+        with open("Rectangle.json", 'r', encoding="utf-8") as f:
+            self.assertEqual('[]', f.read())
+        with self.assertRaises(AttributeError):
+            Rectangle.save_to_file("string")
+        with self.assertRaises(AttributeError):
+            Rectangle.save_to_file([1, 2, 3, 4])

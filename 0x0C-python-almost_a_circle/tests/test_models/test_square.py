@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-""" rectangle.py
+""" test_square.py
 
 Author: Yunus Kedir
 
@@ -15,6 +15,7 @@ Classes:
 import unittest
 import sys
 import io
+import json
 import models.square as square
 import models.rectangle as rectangle
 import models.base as base
@@ -256,6 +257,7 @@ class TestSquare(unittest.TestCase):
         self.assertEqual(str(s), "[Square] (10) 12/13 - 11")
 
     def test_update_method_kwargs(self):
+        """Tests the update method of the Square class with **kwargs."""
         s = Square(10)
         s.update(id=100)
         self.assertEqual(str(s), "[Square] (100) 0/0 - 10")
@@ -307,3 +309,62 @@ class TestSquare(unittest.TestCase):
             s.update(id=98, x=-1, size=15)
         with self.assertRaises(ValueError):
             s.update(y=-1, x=1, size=2, id=-1)
+
+    def test_to_dictionary_method(self):
+        """Tests the to_dictionary method of the Square class."""
+        s = Square(1, 2, 3, 4)
+        self.assertIsInstance(s.to_dictionary(), dict)
+        self.assertEqual(s.to_dictionary(), {
+            'x': 2,
+            'y': 3,
+            "size": 1,
+            "id": 4
+        }
+        )
+        s2 = Square(5)
+        self.assertEqual(s2.to_dictionary(), {
+            'x': 0,
+            'y': 0,
+            "size": 5,
+            "id": s2.id
+        }
+        )
+        s2.size = 10
+        self.assertEqual(s2.to_dictionary(), {
+            'x': 0,
+            'y': 0,
+            "size": 10,
+            "id": s2.id
+        }
+        )
+        dct = s.to_dictionary()
+        s2.update(**dct)
+        self.assertEqual(s2.to_dictionary(), dct)
+        self.assertIsNot(s, s2)
+
+    def test_to_json_string_method(self):
+        """Tests the to_json_string method of the Base class."""
+        s = Square(10)
+        dct = s.to_dictionary()
+        json_dct = s.to_json_string([dct])
+        self.assertIsInstance(json_dct, str)
+        self.assertEqual(json_dct, json.dumps([dct], sort_keys=True))
+
+    def test_save_to_file_method(self):
+        """Tests the save_to_file method of the Base class."""
+        s = Square(10)
+        s2 = Square(1, 2, 3, 4)
+        json_str = s.to_json_string([s.to_dictionary(), s2.to_dictionary()])
+        Square.save_to_file([s, s2])
+        with open("Square.json", 'r', encoding="utf-8") as f:
+            self.assertEqual(json_str, f.read())
+        Square.save_to_file(None)
+        with open("Square.json", 'r', encoding="utf-8") as f:
+            self.assertEqual('[]', f.read())
+        Square.save_to_file([])
+        with open("Square.json", 'r', encoding="utf-8") as f:
+            self.assertEqual('[]', f.read())
+        with self.assertRaises(AttributeError):
+            Square.save_to_file("string")
+        with self.assertRaises(AttributeError):
+            Square.save_to_file([1, 2, 3, 4])
