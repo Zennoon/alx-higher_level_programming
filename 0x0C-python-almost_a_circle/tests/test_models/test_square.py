@@ -220,11 +220,10 @@ class TestSquare(unittest.TestCase):
         output = io.StringIO()
         sys.stdout = output
         s = Square(10)
-        self.assertEqual(str(s),
-    "[Square] ({}) 0/0 - 10".format(Base.__dict__["_Base__nb_objects"]))
+        string = "[Square] ({}) ".format(Base.__dict__["_Base__nb_objects"])
+        self.assertEqual(str(s), string + "0/0 - 10")
         print(s)
-        self.assertEqual(output.getvalue(),
-    "[Square] ({}) 0/0 - 10\n".format(Base.__dict__["_Base__nb_objects"]))
+        self.assertEqual(output.getvalue(), string + "0/0 - 10\n")
 
         output = io.StringIO()
         sys.stdout = output
@@ -243,8 +242,8 @@ class TestSquare(unittest.TestCase):
         """Tests the update method of the Rectangle class with *args."""
         s = Square(10)
         s.update()
-        self.assertEqual(str(s),
-    "[Square] ({}) 0/0 - 10".format(Base.__dict__["_Base__nb_objects"]))
+        string = "[Square] ({}) ".format(Base.__dict__["_Base__nb_objects"])
+        self.assertEqual(str(s), string + "0/0 - 10")
         s.update(0)
         self.assertEqual(str(s), "[Square] (0) 0/0 - 10")
         s.update(1, 2)
@@ -394,3 +393,18 @@ class TestSquare(unittest.TestCase):
         self.assertEqual(s.to_dictionary(), s2.to_dictionary())
         with self.assertRaises(TypeError):
             Square.create(None)
+
+    def test_load_from_file_method(self):
+        """Tests the load_from_file method of the Base class."""
+        Square.save_to_file(None)
+        self.assertEqual(Square.load_from_file(), [])
+        Square.save_to_file([])
+        self.assertEqual(Square.load_from_file(), [])
+        s = Square(10, 10)
+        r = Rectangle(5, 6)
+        s2 = Square(1, 2, 3, 4)
+        Square.save_to_file([s, r, s2])
+        old_rs = [s, r, s2]
+        new_rs = Square.load_from_file()
+        for idx, sq in enumerate(new_rs):
+            self.assertIsInstance(sq, Square)

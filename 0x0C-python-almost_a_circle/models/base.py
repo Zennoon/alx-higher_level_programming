@@ -67,7 +67,7 @@ class Base(object):
 
     @staticmethod
     def from_json_string(json_string):
-        """Returns the python object resulting from evaluation of a JSON string.
+        """Returns apython object resulting from evaluation of a JSON string.
 
         Args:
             json_string (str): A json string that represents a python object.
@@ -81,6 +81,30 @@ class Base(object):
 
     @classmethod
     def create(cls, **dictionary):
+        """Creates a new instance of the calling class.
+
+        Args:
+            dictionary (dict): A dictionary containing attributes and their
+                               values to assign to the new instance.
+
+        Return:
+            A new instance of the calling class with attribute values extracted
+            from the dictionary."""
         instance = cls(10, 10)
         instance.update(**dictionary)
         return (instance)
+
+    @classmethod
+    def load_from_file(cls):
+        """Returns a list of instances created from a JSON string stored in
+        a file."""
+        objs = []
+        try:
+            f = open("{}.json".format(cls.__name__), 'r', encoding="utf-8")
+        except Exception:
+            return (objs)
+        obj_dcts = cls.from_json_string(f.read())
+        f.close()
+        for dct in obj_dcts:
+            objs.append(cls.create(**dct))
+        return (objs)

@@ -140,6 +140,7 @@ class Rectangle(Base):
             print('#' * self.__width)
 
     def to_dictionary(self):
+        """Returns a dictionary representation of a Rectangle instance."""
         obj_dict = {
             'x': self.__x,
             'y': self.__y,

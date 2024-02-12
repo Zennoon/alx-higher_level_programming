@@ -233,11 +233,11 @@ class TestRectangle(unittest.TestCase):
         output = io.StringIO()
         sys.stdout = output
         r = Rectangle(10, 10)
-        self.assertEqual(str(r),
-    "[Rectangle] ({}) 0/0 - 10/10".format(Base.__dict__["_Base__nb_objects"]))
+        s = "[Rectangle] ({}) ".format(Base.__dict__["_Base__nb_objects"])
+        self.assertEqual(str(r), s + "0/0 - 10/10")
         print(r)
-        self.assertEqual(output.getvalue(),
-    "[Rectangle] ({}) 0/0 - 10/10\n".format(Base.__dict__["_Base__nb_objects"]))
+        s = "[Rectangle] ({}) ".format(Base.__dict__["_Base__nb_objects"])
+        self.assertEqual(output.getvalue(), s + "0/0 - 10/10\n")
 
         output = io.StringIO()
         sys.stdout = output
@@ -257,8 +257,8 @@ class TestRectangle(unittest.TestCase):
         """Tests the update method of the Rectangle class with *args."""
         r = Rectangle(10, 10)
         r.update()
-        self.assertEqual(str(r),
-    "[Rectangle] ({}) 0/0 - 10/10".format(Base.__dict__["_Base__nb_objects"]))
+        s = "[Rectangle] ({}) ".format(Base.__dict__["_Base__nb_objects"])
+        self.assertEqual(str(r), s + "0/0 - 10/10")
         r.update(0)
         self.assertEqual(str(r), "[Rectangle] (0) 0/0 - 10/10")
         r.update(1, 2)
@@ -273,6 +273,7 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(str(r), "[Rectangle] (15) 18/19 - 16/17")
 
     def test_update_method_kwargs(self):
+        """Tests the update method of the Rectangle class with *kwargs."""
         r = Rectangle(10, 10)
         r.update(id=100)
         self.assertEqual(str(r), "[Rectangle] (100) 0/0 - 10/10")
@@ -412,3 +413,19 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(r.to_dictionary(), r2.to_dictionary())
         with self.assertRaises(TypeError):
             Rectangle.create(None)
+
+    def test_load_from_file_method(self):
+        """Tests the load_from_file method of the Base class."""
+        Rectangle.save_to_file(None)
+        self.assertEqual(Rectangle.load_from_file(), [])
+        Rectangle.save_to_file([])
+        self.assertEqual(Rectangle.load_from_file(), [])
+        r = Rectangle(10, 10)
+        r2 = Rectangle(5, 6)
+        r3 = Rectangle(1, 2, 3, 4, 5)
+        Rectangle.save_to_file([r, r2, r3])
+        old_rs = [r, r2, r3]
+        new_rs = Rectangle.load_from_file()
+        for idx, rect in enumerate(new_rs):
+            self.assertIsInstance(rect, Rectangle)
+            self.assertEqual(rect.to_dictionary(), old_rs[idx].to_dictionary())
