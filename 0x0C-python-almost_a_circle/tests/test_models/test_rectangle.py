@@ -23,6 +23,14 @@ Base = base.Base
 
 class TestRectangle(unittest.TestCase):
     """unittest test cases for the models.rectangle module."""
+    def setUp(self):
+        """Set up fixture for the tests."""
+        pass
+
+    def tearDown(self):
+        """Tear down fixture for the tests."""
+        pass
+
     def test_valid_module(self):
         """Tests that the module has been imported successfully."""
         self.assertEqual(rectangle.__class__.__name__, "module")
@@ -106,6 +114,8 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(r.x, 0)
         r.x = 2
         self.assertEqual(r.x, 2)
+        r = Rectangle(10, 10, 1, 1)
+        self.assertEqual(r.x, 1)
         for wrong_type in [1.0, 1 + 1j, "1", [1], {}]:
             with self.assertRaises(TypeError):
                 r = Rectangle(1, 1, wrong_type, 1)
@@ -126,6 +136,8 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(r.y, 0)
         r.y = 3
         self.assertEqual(r.y, 3)
+        r = Rectangle(10, 10, 1, 1)
+        self.assertEqual(r.y, 1)
         for wrong_type in [1.0, 1 + 1j, "1", [1], {}]:
             with self.assertRaises(TypeError):
                 r = Rectangle(1, 1, 1, wrong_type)
@@ -147,3 +159,44 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(r.id, Base.__dict__["_Base__nb_objects"])
         r.id = 25
         self.assertEqual(r.id, 25)
+
+    def test_area_method(self):
+        """Tests the area method of the Rectangle class."""
+        r = Rectangle(10, 10, 5, 5)
+        self.assertEqual(r.area(), 100)
+        r.width = 5
+        self.assertEqual(r.area(), 50)
+        r.height = 2
+        self.assertEqual(r.area(), 10)
+        r.x = 0
+        r.y = 0
+        self.assertEqual(r.area(), 10)
+
+    def test_display_method(self):
+        """Tests the display method of the Rectangle class."""
+        import sys
+        import io
+
+        # Redirecting sys.stdout to a io object to capture the output
+        output = io.StringIO()
+        sys.stdout = output
+        r = Rectangle(1, 1)
+        r.display()
+        self.assertEqual(output.getvalue(), "#\n")
+
+        output = io.StringIO()
+        sys.stdout = output
+        r.width = 3
+        r.height = 4
+        r.display()
+        self.assertEqual(output.getvalue(), "###\n###\n###\n###\n")
+
+        output = io.StringIO()
+        sys.stdout = output
+        r.width = 5
+        r.height = 6
+        r.display()
+        self.assertEqual(output.getvalue(),
+                         "#####\n#####\n#####\n#####\n#####\n#####\n")
+        # Returning sys.stdout to original value
+        sys.stdout = sys.__stdout__
