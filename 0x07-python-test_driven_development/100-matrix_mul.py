@@ -39,7 +39,8 @@ def validate_matrix(matrix, name):
             raise TypeError(f"{name} must be a list of lists")
         for item in row:
             if item.__class__ not in [int, float]:
-               raise TypeError(f"{name} should contain only integers or floats")
+                s = f"{name} should contain only "
+                raise TypeError(s + "integers or floats")
         if len(row) != row_size:
             raise TypeError(f"each row of {name} must be of the same size")
     if len(matrix) == 0 or len(matrix[0]) == 0:
