@@ -1,0 +1,113 @@
+===========================================================================
+doctest testfile for the 101-lazy_matrix_mul module in the parent directory
+===========================================================================
+
+The 100-lazy_matrix_mul module contains a function lazy_matrix_mul that accepts
+two matrices, check their validity, and return the result of their
+multiplication if they are compatible for multiplication. If the two matrices
+are invalid, or if they can't be multiplied, an exception is raised.
+
+For more information concerning the module, or the function, refer to the
+docstring in the module.
+
+Example of Usage
+================
+
+	Importing the function
+	----------------------
+	>>> lazy_matrix_mul = __import__("101-lazy_matrix_mul").lazy_matrix_mul
+
+
+	Invalid Arguments
+	-----------------
+	>>> lazy_matrix_mul(None, None) # doctest: +ELLIPSIS
+	Traceback (most recent call last):
+		  ...
+	TypeError: ...
+
+	>>> lazy_matrix_mul("string", 1) # doctest: +ELLIPSIS
+        Traceback (most recent call last):
+                  ...
+        ValueError: ...
+
+	>>> lazy_matrix_mul("string", [[1, 2, 3]]) # doctest: +ELLIPSIS
+        Traceback (most recent call last):
+                  ...
+        ValueError: ...
+
+	>>> lazy_matrix_mul([[1, 2, 3]], "string") # doctest: +ELLIPSIS
+        Traceback (most recent call last):
+                  ...
+        ValueError: ...
+
+	>>> lazy_matrix_mul([], [[1, 2, 3]])  # doctest: +ELLIPSIS
+        Traceback (most recent call last):
+                  ...
+        ValueError: ...
+
+	>>> lazy_matrix_mul([[]], [[1, 2, 3]]) # doctest: +ELLIPSIS
+        Traceback (most recent call last):
+                  ...
+        ValueError: ...
+
+	>>> lazy_matrix_mul([[1, 2, 3]], []) # doctest: +ELLIPSIS
+        Traceback (most recent call last):
+                  ...
+        ValueError: ...
+
+	>>> lazy_matrix_mul([[1, 2, 3]], [[]]) # doctest: +ELLIPSIS
+        Traceback (most recent call last):
+                  ...
+        ValueError: ...
+
+	>>> lazy_matrix_mul([1, 2, 3], [[1, 2, 3]]) # doctest: +ELLIPSIS
+        Traceback (most recent call last):
+                  ...
+        ValueError: ...
+
+	>>> lazy_matrix_mul([[1, 2, 3]], ['a', 'b', 'c']) # doctest: +ELLIPSIS
+        Traceback (most recent call last):
+                  ...
+        TypeError: ...
+
+	>>> lazy_matrix_mul([[1, 1.5, '2']], [[1], [1.5], [2]]) # doctest: +ELLIPSIS
+        Traceback (most recent call last):
+                  ...
+        TypeError: ...
+
+	>>> lazy_matrix_mul([[1, 1.5, 2]], [[1], ['1.5'], [2]]) # doctest: +ELLIPSIS
+        Traceback (most recent call last):
+                  ...
+        TypeError: ...
+
+	>>> lazy_matrix_mul([[1, 2, 3], [1, 2]], [[1, 2, 3]]) # doctest: +ELLIPSIS
+        Traceback (most recent call last):
+                  ...
+        ValueError: ...
+
+	>>> lazy_matrix_mul([[1, 2, 3]], [[1], [1, 2]]) # doctest: +ELLIPSIS
+	Traceback (most recent call last):
+                  ...
+        ValueError: ...
+
+	>>> lazy_matrix_mul([[1, 2, 3], [1, 2, 3]], [[1, 2, 3]]) # doctest: +ELLIPSIS
+	Traceback (most recent call last):
+                  ...
+        ValueError: ...
+
+	>>> lazy_matrix_mul([[1, 2, 3]], [[1, 2, 3]]) # doctest: +ELLIPSIS
+	Traceback (most recent call last):
+                  ...
+        ValueError: ...
+
+
+	Valid Arguments
+	---------------
+	>>> lazy_matrix_mul([[1, 2, 3]], [[1], [2], [3]])
+	[[14]]
+
+	>>> lazy_matrix_mul([[12,5,7],[2,9,10],[17,8,6]] ,[[3,1], [4,2], [2,7]])
+	[[70, 71], [62, 90], [95, 75]]
+
+	>>> lazy_matrix_mul([[12,5,7],[2,9,10],[17,8,6]] ,[[3.0,1], [4,2], [2,7]])
+        [[70.0, 71.0], [62.0, 90.0], [95.0, 75.0]]
