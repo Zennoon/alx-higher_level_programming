@@ -15,6 +15,15 @@ import numpy as np
 
 
 def lazy_matrix_mul(m_a, m_b):
+    """Multiplies two matrices using the numpy library.
+
+    Args:
+        m_a (list): First operand.
+        m_b (list): Second operand.
+
+    Returns:
+        list: Result of the multiplication of m_a, and m_b.
+    """
     if m_a == [] or m_a == [[]]:
         raise ValueError("m_a can't be empty")
 
