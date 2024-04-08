@@ -9,8 +9,7 @@ for (let i = 2; i < process.argv.length; i++) {
 
 numArgs.sort((a, b) => (a - b));
 numArgs.reverse();
-console.log(numArgs);
 if (numArgs[1]) {
   secondBiggest = numArgs[1];
 }
-console.log(secondBiggest)
+console.log(secondBiggest);
