@@ -2,17 +2,8 @@
 
 const fs = require('fs');
 const args = process.argv;
-let txtBuffer;
+let txtBuffer = '';
 
-fs.readFile('./' + args[2], (err, data) => {
-  if (err) throw err;
-  txtBuffer = data.toString();
-});
-
-fs.readFile('./' + args[3], (err, data) => {
-  if (err) throw err;
-  txtBuffer += data.toString();
-  fs.writeFile('./' + args[4], txtBuffer, (err) => {
-    if (err) throw err;
-  });
-});
+txtBuffer = fs.readFileSync('./' + args[2]).toString() +
+    fs.readFileSync('./' + args[3]).toString();
+fs.writeFileSync('./' + args[4], txtBuffer);
