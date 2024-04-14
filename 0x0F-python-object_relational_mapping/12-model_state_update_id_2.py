@@ -5,7 +5,7 @@
 Author: Yunus Kedir
 
 Contains:
-    script that creates a new State instance and persists it to given database
+    script that retrieves a record with known id and alters/updates its name
 """
 import sys
 from model_state import Base, State
@@ -18,8 +18,9 @@ if __name__ == "__main__":
     conn = "mysql+mysqldb://{}:{}@localhost:3306/{}"
     engine = create_engine(conn.format(args[1], args[2], args[3]))
     session = sessionmaker(bind=engine)()
-    new_state = State(name="Louisiana")
-    session.add(new_state)
+
+    state = session.query(State).filter(State.id == 2).one_or_none()
+    if state:
+        state.name = "New Mexico"
     session.commit()
-    print(new_state.id)
     engine.dispose()

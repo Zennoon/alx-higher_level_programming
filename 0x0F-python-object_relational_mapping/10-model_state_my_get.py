@@ -26,3 +26,4 @@ if __name__ == "__main__":
         print(state_id.id)
     else:
         print("Not found")
+    engine.dispose()

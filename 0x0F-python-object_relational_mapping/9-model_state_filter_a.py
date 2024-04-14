@@ -24,3 +24,4 @@ if __name__ == "__main__":
     states = states.order_by(State.id).all()
     for state in states:
         print("{}: {}".format(state.id, state.name))
+    engine.dispose()
