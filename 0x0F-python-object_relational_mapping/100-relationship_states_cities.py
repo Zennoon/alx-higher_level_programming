@@ -8,8 +8,8 @@ Contains:
     Script that creates a new state
 """
 import sys
-from relationship_state import Base, State
-from relationship_city import City
+from relationship_city import Base, City
+from relationship_state import State
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -26,4 +26,6 @@ if __name__ == "__main__":
     new_state.cities = [City(name="San Francisco")]
     print(new_state.cities[0].state)
     session.add(new_state)
+    session.commit()
+    session.delete(new_state)
     session.commit()

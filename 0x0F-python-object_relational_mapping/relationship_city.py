@@ -9,9 +9,11 @@ Contains:
     =======
     City - Inherits from Base and maps to 'cities' table of a database
 """
-from relationship_state import Base, State
 from sqlalchemy import Column, Integer, String, ForeignKey
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import declarative_base
+
+
+Base = declarative_base()
 
 
 class City(Base):
@@ -20,8 +22,3 @@ class City(Base):
     id = Column(Integer, autoincrement="auto", primary_key=True)
     name = Column(String(128), nullable=False)
     state_id = Column(Integer, ForeignKey("states.id"))
-    state = relationship("State", back_populates="cities")
-
-
-State.cities = relationship("City", back_populates="state",
-                            cascade="all, delete, delete-orphan")
