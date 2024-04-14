@@ -10,9 +10,11 @@ Contains:
     State - Inherits from a declarative base class
 """
 import sqlalchemy
-from relationship_city import Base, City
 from sqlalchemy import Column, Integer, String
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import declarative_base, relationship
+
+
+Base = declarative_base()
 
 
 class State(Base):
@@ -20,7 +22,3 @@ class State(Base):
     __tablename__ = "states"
     id = Column(Integer, primary_key=True, autoincrement="auto")
     name = Column(String(128), nullable=False)
-    cities = relationship("City", back_populates="state",
-                          cascade="all, delete, delete-orphan")
-
-City.state = relationship("State", back_populates="cities")
