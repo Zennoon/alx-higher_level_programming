@@ -23,4 +23,3 @@ if __name__ == "__main__":
     states = session.query(State.name).order_by(State.id).all()
     for idx, state in enumerate(states):
         print("{}: {}".format(idx + 1, state.name))
-    engine.dispose()
