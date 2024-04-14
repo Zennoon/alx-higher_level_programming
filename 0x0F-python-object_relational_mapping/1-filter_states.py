@@ -17,10 +17,11 @@ if __name__ == '__main__':
     args = sys.argv
     conn = MySQLdb.connect(user=args[1], passwd=args[2], db=args[3])
     cursor = conn.cursor()
-    query = "SELECT * FROM states WHERE states.name LIKE 'N%' ORDER BY id"
-    cursor.execute(query)
+    q = "SELECT * FROM states WHERE states.name LIKE 'N%' ORDER BY states.id"
+    cursor.execute(q)
     items = cursor.fetchall()
     for item in items:
-        print(item)
+        if item[1][0].isupper():
+            print(item)
     cursor.close()
     conn.close()
