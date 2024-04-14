@@ -8,8 +8,8 @@ Contains:
     Script that uses the relationship established between classes
 """
 import sys
-from relationship_state import Base, State
 from relationship_city import City
+from relationship_state import Base, State
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
