@@ -21,11 +21,6 @@ if __name__ == "__main__":
     Base.metadata.create_all(engine)
     session = sessionmaker(bind=engine)()
     new_state = State(name="California")
-    print(new_state)
-    print(new_state.cities)
     new_state.cities = [City(name="San Francisco")]
-    print(new_state.cities[0].state)
     session.add(new_state)
-    session.commit()
-    session.delete(new_state)
     session.commit()
