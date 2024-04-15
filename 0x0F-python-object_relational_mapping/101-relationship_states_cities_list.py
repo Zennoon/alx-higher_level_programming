@@ -18,6 +18,7 @@ if __name__ == "__main__":
     args = sys.argv
     conn = "mysql+mysqldb://{}:{}@localhost:3306/{}"
     engine = create_engine(conn.format(args[1], args[2], args[3]))
+    Base.metadata.create_all(engine)
     session = sessionmaker(bind=engine)()
     states = session.query(State).order_by(State.id).all()
     for state in states:
