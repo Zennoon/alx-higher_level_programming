@@ -20,8 +20,9 @@ if __name__ == "__main__":
     engine = create_engine(conn.format(args[1], args[2], args[3]))
     session = sessionmaker(bind=engine)()
     all_states = session.query(State).order_by(State.id).all()
-    for st in all_states:
-        print("{}: {}".format(st.id, st.name))
-        for c in st.cities:
-            print("\t{}: {}".format(c.id, c.name))
+    for state in all_states:
+        print("{}: {}".format(state.id, state.name))
+        state_cities = state.cities
+        for city in state_cities:
+            print("\t{}: {}".format(city.id, city.name))
     engine.dispose()
