@@ -19,10 +19,9 @@ if __name__ == "__main__":
     conn = "mysql+mysqldb://{}:{}@localhost:3306/{}"
     engine = create_engine(conn.format(args[1], args[2], args[3]))
     session = sessionmaker(bind=engine)()
-    all_states = session.query(State).order_by(State.id).all()
-    for state in all_states:
+    states = session.query(State).order_by(State.id).all()
+    for state in states:
         print("{}: {}".format(state.id, state.name))
-        state_cities = state.cities
-        for city in state_cities:
-            print("\t{}: {}".format(city.id, city.name))
-    engine.dispose()
+        cities = state.cities
+        for city in cities:
+            print("    {}: {}".format(city.id, city.name))
