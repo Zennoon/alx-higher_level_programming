@@ -31,11 +31,3 @@ def find_peak(list_int):
     if (mid + 1) < len(list_int) and list_int[mid + 1] > list_int[mid]:
         return (find_peak(list_int[mid + 1:]))
     return (list_int[mid])
-
-
-print(find_peak([1, 2, 4, 6, 3]))
-print(find_peak([4, 2, 1, 2, 3, 1]))
-print(find_peak([2, 2, 2]))
-print(find_peak([]))
-print(find_peak([-2, -4, 2, 1]))
-print(find_peak([4, 2, 1, 2, 2, 2, 3, 1]))
