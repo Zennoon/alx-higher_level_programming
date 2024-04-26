@@ -7,8 +7,8 @@ Author: Yunus Kedir
 Contains:
     Misc
     ====
-    Sends a request to a given URL and displays the body if no client or server       \
-     error (status code is lower than 400), otherwise displays error code
+    Sends a request to a given URL and displays the body if no client or server
+    error (status code is lower than 400), otherwise displays error code
 """
 import requests
 import sys
