@@ -12,9 +12,10 @@ Contains:
 import urllib.request
 
 
-with urllib.request.urlopen('https://alx-intranet.hbtn.io/status') as res:
-    res_content = res.read()
-    print("Body response:")
-    print("\t- type: {}".format(type(res_content)))
-    print("\t- content: {}".format(res_content))
-    print("\t- utf8 content: {}".format(res_content.decode('utf-8')))
+if __name__ == '__main__':
+    with urllib.request.urlopen('https://alx-intranet.hbtn.io/status') as res:
+        res_content = res.read()
+        print("Body response:")
+        print("\t- type: {}".format(type(res_content)))
+        print("\t- content: {}".format(res_content))
+        print("\t- utf8 content: {}".format(res_content.decode('utf-8')))
