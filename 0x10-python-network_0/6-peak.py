@@ -25,9 +25,16 @@ def find_peak(list_int):
     """
     if len(list_int) == 0:
         return (None)
-    mid = len(list_int) // 2
-    if (mid - 1) >= 0 and list_int[mid - 1] > list_int[mid]:
-        return (find_peak(list_int[0:mid]))
-    if (mid + 1) < len(list_int) and list_int[mid + 1] > list_int[mid]:
-        return (find_peak(list_int[mid + 1:]))
+    size = len(list_int)
+    mid = 0
+    diff = size // 2
+    while not ((mid - 1 < 0 or list_int[mid] >= list_int[mid - 1]) and
+               (mid + 1 >= size or list_int[mid] >= list_int[mid + 1])):
+        if diff == 0:
+            diff = 1
+        if mid - 1 >= 0 and list_int[mid - 1] > list_int[mid]:
+            mid -= diff
+        elif mid + 1 < size and list_int[mid + 1] > list_int[mid]:
+            mid += diff
+        diff //= 2
     return (list_int[mid])
