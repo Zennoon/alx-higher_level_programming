@@ -1,7 +1,7 @@
 #!/usr/bin/node
 
 /** Makes a request to a star-wars API and displays the number of movies
-    the character 'Wedge Antilles' is present in **/
+    the character 'Wedge Antilles' (ID 18) is present in **/
 
 const request = require('request');
 const url = process.argv[2];
